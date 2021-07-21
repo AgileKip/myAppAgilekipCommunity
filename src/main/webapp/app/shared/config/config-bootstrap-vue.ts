@@ -23,7 +23,9 @@ import {
   VBModal,
   BFormDatepicker,
   BInputGroup,
-  BInputGroupPrepend, BCard, VBToggle,
+  BInputGroupPrepend,
+  BCard,
+  VBToggle,
 } from 'bootstrap-vue';
 
 export function initBootstrapVue(vue) {

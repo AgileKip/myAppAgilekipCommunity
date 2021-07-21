@@ -45,6 +45,8 @@ import { faPlayCircle } from '@fortawesome/free-solid-svg-icons/faPlayCircle';
 import { faPlay } from '@fortawesome/free-solid-svg-icons/faPlay';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle';
 import { faClock } from '@fortawesome/free-solid-svg-icons/faClock';
+import { faCompressAlt } from '@fortawesome/free-solid-svg-icons/faCompressAlt';
+import { faExpandAlt } from '@fortawesome/free-solid-svg-icons/faExpandAlt';
 
 import VueCookie from 'vue-cookie';
 import Vuelidate from 'vuelidate';
@@ -53,8 +55,6 @@ import Vue2Filters from 'vue2-filters';
 import * as filters from '@/shared/date/filters';
 import { accountStore } from '@/shared/config/store/account-store';
 import { translationStore } from '@/shared/config/store/translation-store';
-import {faCompressAlt} from "@fortawesome/free-solid-svg-icons/faCompressAlt";
-import {faExpandAlt} from "@fortawesome/free-solid-svg-icons/faExpandAlt";
 
 const dateTimeFormats: DateTimeFormats = {
   en: {
@@ -136,8 +136,8 @@ export function initFortAwesome(vue) {
     faPlayCircle,
     faCheckCircle,
     faClock,
-      faCompressAlt,
-      faExpandAlt
+    faCompressAlt,
+    faExpandAlt
   );
 }
 

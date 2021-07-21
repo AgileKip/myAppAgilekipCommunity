@@ -65,30 +65,33 @@
                   <div class="row summary" v-if="processInstance.processDefinition">
                     <div class="col-sm">
                       <span class="label" v-text="$t('myAppAgilekipCommunityApp.processInstance.processDefinition')">
-                        Process Definition
-                      </span>:
+                        Process Definition </span
+                      >:
                       <span class="link">
-                        <router-link class="link" :to="`/process-definition/${processInstance.processDefinition.bpmnProcessDefinitionId}/view`">
+                        <router-link
+                          class="link"
+                          :to="`/process-definition/${processInstance.processDefinition.bpmnProcessDefinitionId}/view`"
+                        >
                           {{ processInstance.processDefinition.name }}
                         </router-link>
                       </span>
                     </div>
                     <div class="col-sm">
                       <span class="label" v-text="$t('myAppAgilekipCommunityApp.processInstance.camundaProcessInstanceId')">
-                        Camunda Process Instance Id
-                      </span>:
+                        Camunda Process Instance Id </span
+                      >:
                       {{ processInstance.camundaProcessInstanceId }}
                     </div>
                     <div class="col-sm">
-                        <span class="label" v-text="$t('myAppAgilekipCommunityApp.processInstance.camundaProcessDefinitionId')">
-                          Camunda Process Definition Id
-                        </span>:
+                      <span class="label" v-text="$t('myAppAgilekipCommunityApp.processInstance.camundaProcessDefinitionId')">
+                        Camunda Process Definition Id </span
+                      >:
                       {{ processInstance.camundaProcessDefinitionId }}
                     </div>
                     <div class="col-sm">
                       <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDefinition.bpmnProcessDefinitionId')">
-                        BPMN Process Definition Id
-                      </span>:
+                        BPMN Process Definition Id </span
+                      >:
                       <span class="link" v-if="processInstance.processDefinition.bpmnProcessDefinitionId">
                         {{ processInstance.processDefinition.bpmnProcessDefinitionId }}
                       </span>
@@ -163,6 +166,4 @@
   color: #737373;
   margin-left: 0.25em;
 }
-
-
 </style>

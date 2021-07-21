@@ -1,8 +1,8 @@
 import Component from 'vue-class-component';
-import {Inject, Prop, Vue} from 'vue-property-decorator';
+import { Inject, Prop, Vue } from 'vue-property-decorator';
 import Viewer from 'bpmn-js/lib/NavigatedViewer';
-import ProcessDefinitionService from "@/entities/process-definition/process-definition.service";
-import {ProcessDefinition} from "@/shared/model/process-definition.model";
+import ProcessDefinitionService from '@/entities/process-definition/process-definition.service';
+import { ProcessDefinition } from '@/shared/model/process-definition.model';
 
 @Component
 export default class AkipShowProcessDefinitionBpmnModelComponent extends Vue {
@@ -23,13 +23,13 @@ export default class AkipShowProcessDefinitionBpmnModelComponent extends Vue {
     this.processDefinitionService()
       .findSpecificationFileContent(this.processDefinition.bpmnProcessDefinitionId)
       .then(
-          res => {
-              var viewer = new Viewer({ container: '#canvas' });
-              viewer.importXML(res.data);
-          },
-          err => {
-              console.error('Problem rendering bpmn ', err.response)
-          }
+        res => {
+          var viewer = new Viewer({ container: '#canvas' });
+          viewer.importXML(res.data);
+        },
+        err => {
+          console.error('Problem rendering bpmn ', err.response);
+        }
       );
   }
 }

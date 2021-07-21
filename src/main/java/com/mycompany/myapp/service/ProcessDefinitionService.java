@@ -4,7 +4,6 @@ import com.mycompany.myapp.domain.ProcessDefinition;
 import com.mycompany.myapp.domain.enumeration.StatusProcessDefinition;
 import com.mycompany.myapp.repository.ProcessDefinitionRepository;
 import com.mycompany.myapp.service.dto.ProcessDefinitionDTO;
-import com.mycompany.myapp.service.dto.ProcessInstanceDTO;
 import com.mycompany.myapp.service.mapper.ProcessDefinitionMapper;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.io.ByteArrayInputStream;
@@ -216,6 +215,12 @@ public class ProcessDefinitionService {
         return findByIdOrBpmnProcessDefinitionId(idOrBpmnProcessDefinitionId).map(processDefinitionMapper::toDto);
     }
 
+    /**
+     * Get the bpmn model of a processDefinition by id.
+     *
+     * @param idOrBpmnProcessDefinitionId the id of the entity.
+     * @return the bpmn model.
+     */
     @Transactional(readOnly = true)
     public Optional<String> findSpecificationFileContentByIdOrBpmnProcessDefinitionId(String idOrBpmnProcessDefinitionId) {
         log.debug("Request to get ProcessDefinition : {}", idOrBpmnProcessDefinitionId);

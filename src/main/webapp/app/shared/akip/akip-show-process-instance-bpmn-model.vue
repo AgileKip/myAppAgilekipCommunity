@@ -7,8 +7,8 @@
 <style scoped>
 .bpmn-model-container {
   height: 500px;
-  border: 1px solid #ccc!important;
+  border: 1px solid #ccc !important;
   border-radius: 5px;
-  background-color: #EEE;
+  background-color: #eee;
 }
 </style>

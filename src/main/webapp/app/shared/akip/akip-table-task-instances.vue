@@ -67,13 +67,13 @@
   font-size: 90%;
 }
 
-.table-sm th:first-child, td:first-child {
+.table-sm th:first-child,
+td:first-child {
   padding-left: 1em;
 }
 
-.table-sm th:last-child, td:last-child {
+.table-sm th:last-child,
+td:last-child {
   padding-right: 1em;
 }
-
-
 </style>

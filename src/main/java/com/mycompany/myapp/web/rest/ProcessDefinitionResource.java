@@ -9,7 +9,6 @@ import com.mycompany.myapp.service.dto.TaskInstanceDTO;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -118,9 +117,8 @@ public class ProcessDefinitionResource {
         return ResponseUtil.wrapOrNotFound(processDefinitionDTO);
     }
 
-
     /**
-     * {@code GET  /process-definitions/:id} : get the "id" processDefinition.
+     * {@code GET  /process-definitions/:id/specificationFileContent} : get the "id" processDefinition.
      *
      * @param idOrBpmnProcessDefinitionId the id of the processDefinitionDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the processDefinitionDTO, or with status {@code 404 (Not Found)}.
@@ -128,7 +126,9 @@ public class ProcessDefinitionResource {
     @GetMapping("/process-definitions/{idOrBpmnProcessDefinitionId}/specificationFileContent")
     public ResponseEntity<String> getProcessDefinitionSpecificationFileContent(@PathVariable String idOrBpmnProcessDefinitionId) {
         log.debug("REST request to get ProcessDefinition : {}", idOrBpmnProcessDefinitionId);
-        Optional<String> specificationFileContent = processDefinitionService.findSpecificationFileContentByIdOrBpmnProcessDefinitionId(idOrBpmnProcessDefinitionId);
+        Optional<String> specificationFileContent = processDefinitionService.findSpecificationFileContentByIdOrBpmnProcessDefinitionId(
+            idOrBpmnProcessDefinitionId
+        );
         return ResponseUtil.wrapOrNotFound(specificationFileContent);
     }
 

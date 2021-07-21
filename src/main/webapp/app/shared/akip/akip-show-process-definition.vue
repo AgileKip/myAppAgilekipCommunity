@@ -19,20 +19,19 @@
         <div class="row summary mt-3">
           <div class="col-sm">
             <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDefinition.bpmnProcessDefinitionId')">
-              BPMN Process Definition Id
-            </span>:
+              BPMN Process Definition Id </span
+            >:
             {{ processDefinition.bpmnProcessDefinitionId }}
           </div>
           <div class="col-sm">
             <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDefinition.camundaProcessDefinitionId')">
-              Camunda Process Definition Id
-            </span>:
+              Camunda Process Definition Id </span
+            >:
             {{ processDefinition.camundaProcessDefinitionId }}
           </div>
           <div class="col-sm">
-            <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDefinition.camundaDeploymentId')">
-              Camunda Deployment Id
-            </span>:
+            <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDefinition.camundaDeploymentId')"> Camunda Deployment Id </span
+            >:
             {{ processDefinition.camundaDeploymentId }}
           </div>
         </div>

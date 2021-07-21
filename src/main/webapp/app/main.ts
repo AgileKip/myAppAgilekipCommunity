@@ -33,7 +33,6 @@ import AkipShowProcessInstanceStatusComponent from '@/shared/akip/akip-show-proc
 import AkipShowTaskInstanceComponent from '@/shared/akip/akip-show-task-instance.vue';
 import AkipShowTaskInstanceStatusComponent from '@/shared/akip/akip-show-task-instance-status.vue';
 import AkipTableTaskInstancesComponent from '@/shared/akip/akip-table-task-instances.vue';
-
 // jhipster-pais-needle-add-component-to-main-import - JHipster/Camunda will import components here
 
 import '../content/scss/vendor.scss';

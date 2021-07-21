@@ -34,13 +34,13 @@ export default class ProcessDefinitionService {
   public findSpecificationFileContent(idOrBpmnProcessDefinitionId: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-          .get(`${baseApiUrl}/${idOrBpmnProcessDefinitionId}/specificationFileContent`)
-          .then(res => {
-            resolve(res);
-          })
-          .catch(err => {
-            reject(err);
-          });
+        .get(`${baseApiUrl}/${idOrBpmnProcessDefinitionId}/specificationFileContent`)
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
     });
   }
 
