@@ -96,7 +96,7 @@
                   </div>
                   <div class="row">
                     <div class="col-12">
-                      <div id="canvas" class="vue-bpmn-diagram-container border-bottom border-top"></div>
+                      <akip-show-process-instance-bpmn-model :processInstance="processInstance"></akip-show-process-instance-bpmn-model>
                     </div>
                   </div>
                 </b-collapse>

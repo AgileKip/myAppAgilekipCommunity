@@ -28,6 +28,7 @@ import AkipShowProcessDefinitionComponent from '@/shared/akip/akip-show-process-
 import AkipShowProcessDefinitionStatusComponent from '@/shared/akip/akip-show-process-definition-status.vue';
 import AkipShowProcessInstanceComponent from '@/shared/akip/akip-show-process-instance.vue';
 import AkipShowProcessInstanceStatusComponent from '@/shared/akip/akip-show-process-instance-status.vue';
+import AkipShowProcessInstanceBpmnModelComponent from '@/shared/akip/akip-show-process-instance-bpmn-model.vue';
 import AkipShowTaskInstanceComponent from '@/shared/akip/akip-show-task-instance.vue';
 import AkipShowTaskInstanceStatusComponent from '@/shared/akip/akip-show-task-instance-status.vue';
 import AkipTableTaskInstancesComponent from '@/shared/akip/akip-table-task-instances.vue';
@@ -64,6 +65,7 @@ Vue.component('akip-show-process-definition', AkipShowProcessDefinitionComponent
 Vue.component('akip-show-process-definition-status', AkipShowProcessDefinitionStatusComponent);
 Vue.component('akip-show-process-instance', AkipShowProcessInstanceComponent);
 Vue.component('akip-show-process-instance-status', AkipShowProcessInstanceStatusComponent);
+Vue.component('akip-show-process-instance-bpmn-model', AkipShowProcessInstanceBpmnModelComponent);
 Vue.component('akip-show-task-instance', AkipShowTaskInstanceComponent);
 Vue.component('akip-show-task-instance-status', AkipShowTaskInstanceStatusComponent);
 Vue.component('akip-table-task-instances', AkipTableTaskInstancesComponent);
