@@ -7,7 +7,7 @@ export default class AkipShowProcessInstanceComponent extends Vue {
   @Prop()
   processInstance: ProcessInstance;
 
-  public collapseController:any = {showTasks:true, showProcess:false};
+  public collapseController:any = {showTasks:true, showProcess:true};
 
   public collapse(collapseComponent) {
       this.collapseController[collapseComponent] = !this.collapseController[collapseComponent];
