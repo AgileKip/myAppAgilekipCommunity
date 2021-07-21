@@ -9,36 +9,36 @@
     <div class="card-body">
       <div class="xcontainer">
         <div class="row px-3">
-          <div class="col-9 description">
+          <div class="col-sm description">
             <div v-if="processDefinition.description">
               <vue-markdown>{{ processDefinition.description }}</vue-markdown>
             </div>
             <slot name="body"></slot>
           </div>
-          <div class="col summary">
-            <div class="label" v-text="$t('myAppAgilekipCommunityApp.processDefinition.status')">Status</div>
-            <div class="link" v-if="processDefinition.status">
-              <akip-show-process-definition-status :status="processDefinition.status"></akip-show-process-definition-status>
-            </div>
-            <hr />
-            <div class="label" v-text="$t('myAppAgilekipCommunityApp.processDefinition.camundaDeploymentId')">Camunda Deployment Id</div>
-            <div class="link" v-if="processDefinition.camundaDeploymentId">
-              {{ processDefinition.camundaDeploymentId }}
-            </div>
-            <hr />
-            <div class="label" v-text="$t('myAppAgilekipCommunityApp.processDefinition.camundaProcessDefinitionId')">
-              Camunda Process Definition Id
-            </div>
-            <div class="link" v-if="processDefinition.camundaProcessDefinitionId">
-              {{ processDefinition.camundaProcessDefinitionId }}
-            </div>
-            <hr />
-            <div class="label" v-text="$t('myAppAgilekipCommunityApp.processDefinition.bpmnProcessDefinitionId')">
+        </div>
+        <div class="row summary mt-3">
+          <div class="col-sm">
+            <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDefinition.bpmnProcessDefinitionId')">
               BPMN Process Definition Id
-            </div>
-            <div class="link" v-if="processDefinition.bpmnProcessDefinitionId">
-              {{ processDefinition.bpmnProcessDefinitionId }}
-            </div>
+            </span>:
+            {{ processDefinition.bpmnProcessDefinitionId }}
+          </div>
+          <div class="col-sm">
+            <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDefinition.camundaProcessDefinitionId')">
+              Camunda Process Definition Id
+            </span>:
+            {{ processDefinition.camundaProcessDefinitionId }}
+          </div>
+          <div class="col-sm">
+            <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDefinition.camundaDeploymentId')">
+              Camunda Deployment Id
+            </span>:
+            {{ processDefinition.camundaDeploymentId }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <akip-show-process-definition-bpmn-model :processDefinition="processDefinition"></akip-show-process-definition-bpmn-model>
           </div>
         </div>
         <div class="row summary-footer">
@@ -78,6 +78,7 @@
 
 .summary {
   color: #586069;
+  font-size: 80%;
 }
 
 .summary hr {

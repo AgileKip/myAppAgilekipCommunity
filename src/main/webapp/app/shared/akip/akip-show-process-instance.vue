@@ -137,7 +137,7 @@
 
 .summary {
   color: #586069;
-  font-size: 75%;
+  font-size: 80%;
 }
 
 .summary hr {
@@ -153,13 +153,6 @@
 .link a {
   font-weight: normal;
   color: #3e8acc;
-}
-
-.vue-bpmn-diagram-container {
-  height: 500px;
-  border: 1px solid #ccc!important;
-  border-radius: 5px;
-  background-color: #EEE;
 }
 
 .collapse-link {

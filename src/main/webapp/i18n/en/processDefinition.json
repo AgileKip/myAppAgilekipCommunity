@@ -24,9 +24,9 @@
       "description": "Description",
       "status": "Status",
       "specificationFile": "Specification File",
-      "camundaDeploymentMessage": "Camunda Deployment Message",
-      "camundaDeploymentId": "Camunda Deployment Id",
-      "camundaProcessDefinitionId": "Camunda Process Definition Id",
+      "camundaDeploymentMessage": "Deployment Message",
+      "camundaDeploymentId": "Deployment Id",
+      "camundaProcessDefinitionId": "Process Definition Id",
       "bpmnProcessDefinitionId": "Bpmn Process Definition Id"
     }
   }

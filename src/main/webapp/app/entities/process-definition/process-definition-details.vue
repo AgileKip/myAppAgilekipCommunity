@@ -6,13 +6,7 @@
           <span v-text="$t('myAppAgilekipCommunityApp.processDefinition.detail.title')">ProcessDefinition</span>
         </h2>
         <akip-show-process-definition :processDefinition="processDefinition">
-          <template v-slot:body>
-            <hr />
-            <ul>
-              <li>xxxx instances</li>
-              <li>yyyy tasks</li>
-            </ul>
-          </template>
+          <template v-slot:body></template>
         </akip-show-process-definition>
         <br />
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
