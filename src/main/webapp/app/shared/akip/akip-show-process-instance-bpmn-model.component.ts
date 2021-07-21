@@ -38,7 +38,7 @@ export default class AkipShowProcessInstanceBpmnModelComponent extends Vue {
                 viewer.importXML(res.data).then(() => {
                   var canvas = viewer.get('canvas');
                   runningTasks.forEach(taskDefinitionKey => {
-                    canvas.addMarker(taskDefinitionKey, 'highlight');
+                    canvas.addMarker(taskDefinitionKey, 'akip-doing-task');
                   });
                 });
               },
