@@ -3,7 +3,6 @@ import {Inject, Prop, Vue} from 'vue-property-decorator';
 import { ProcessInstance } from '@/shared/model/process-instance.model';
 import Viewer from 'bpmn-js/lib/NavigatedViewer';
 import ProcessDefinitionService from "@/entities/process-definition/process-definition.service";
-import wait from "fork-ts-checker-webpack-plugin/lib/utils/async/wait";
 import ProcessInstanceService from "@/entities/process-instance/process-instance.service";
 import {ITaskInstance} from "@/shared/model/task-instance.model";
 
@@ -43,23 +42,17 @@ export default class AkipShowProcessInstanceComponent extends Vue {
                               runningTasks.forEach(taskDefinitionKey => {
                                   canvas.addMarker(taskDefinitionKey, 'highlight');
                               })
-
                           });
                       },
                       err => {
                           console.error('Problem rendering bpmn ', err.response)
                       }
                   );
-
           },
           err => {
-
+              console.error('Problem rendering bpmn ', err.response)
           }
       );
-
-
-
-
   }
 
   public collapse(collapseComponent) {
