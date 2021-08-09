@@ -1,14 +1,13 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.service.ProcessDefinitionService;
+import com.mycompany.myapp.service.ProcessDeploymentService;
 import com.mycompany.myapp.service.ProcessInstanceService;
 import com.mycompany.myapp.service.TaskInstanceService;
 import com.mycompany.myapp.service.dto.ProcessDefinitionDTO;
+import com.mycompany.myapp.service.dto.ProcessDeploymentDTO;
 import com.mycompany.myapp.service.dto.ProcessInstanceDTO;
 import com.mycompany.myapp.service.dto.TaskInstanceDTO;
-import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -35,62 +34,21 @@ public class ProcessDefinitionResource {
 
     private final ProcessDefinitionService processDefinitionService;
 
+    private final ProcessDeploymentService processDeploymentService;
+
     private final ProcessInstanceService processInstanceService;
 
     private final TaskInstanceService taskInstanceService;
 
     public ProcessDefinitionResource(
-        ProcessDefinitionService processDefinitionService,
-        ProcessInstanceService processInstanceService,
-        TaskInstanceService taskInstanceService
+            ProcessDefinitionService processDefinitionService,
+            ProcessDeploymentService processDeploymentService, ProcessInstanceService processInstanceService,
+            TaskInstanceService taskInstanceService
     ) {
         this.processDefinitionService = processDefinitionService;
+        this.processDeploymentService = processDeploymentService;
         this.processInstanceService = processInstanceService;
         this.taskInstanceService = taskInstanceService;
-    }
-
-    /**
-     * {@code POST  /process-definitions} : Create a new processDefinition.
-     *
-     * @param processDefinitionDTO the processDefinitionDTO to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new processDefinitionDTO, or with status {@code 400 (Bad Request)} if the processDefinition has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PostMapping("/process-definitions")
-    public ResponseEntity<ProcessDefinitionDTO> createProcessDefinition(@RequestBody ProcessDefinitionDTO processDefinitionDTO)
-        throws URISyntaxException {
-        log.debug("REST request to save ProcessDefinition : {}", processDefinitionDTO);
-        if (processDefinitionDTO.getId() != null) {
-            throw new BadRequestAlertException("A new processDefinition cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        ProcessDefinitionDTO result = processDefinitionService.save(processDefinitionDTO);
-        return ResponseEntity
-            .created(new URI("/api/process-definitions/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
-    }
-
-    /**
-     * {@code PUT  /process-definitions} : Updates an existing processDefinition.
-     *
-     * @param processDefinitionDTO the processDefinitionDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated processDefinitionDTO,
-     * or with status {@code 400 (Bad Request)} if the processDefinitionDTO is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the processDefinitionDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PutMapping("/process-definitions")
-    public ResponseEntity<ProcessDefinitionDTO> updateProcessDefinition(@RequestBody ProcessDefinitionDTO processDefinitionDTO)
-        throws URISyntaxException {
-        log.debug("REST request to update ProcessDefinition : {}", processDefinitionDTO);
-        if (processDefinitionDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        ProcessDefinitionDTO result = processDefinitionService.save(processDefinitionDTO);
-        return ResponseEntity
-            .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, processDefinitionDTO.getId().toString()))
-            .body(result);
     }
 
     /**
@@ -113,23 +71,32 @@ public class ProcessDefinitionResource {
     @GetMapping("/process-definitions/{idOrBpmnProcessDefinitionId}")
     public ResponseEntity<ProcessDefinitionDTO> getProcessDefinition(@PathVariable String idOrBpmnProcessDefinitionId) {
         log.debug("REST request to get ProcessDefinition : {}", idOrBpmnProcessDefinitionId);
-        Optional<ProcessDefinitionDTO> processDefinitionDTO = processDefinitionService.findOne(idOrBpmnProcessDefinitionId);
+        Optional<ProcessDefinitionDTO> processDefinitionDTO = processDefinitionService.findByIdOrBpmnProcessDefinitionId(idOrBpmnProcessDefinitionId);
         return ResponseUtil.wrapOrNotFound(processDefinitionDTO);
     }
 
     /**
-     * {@code GET  /process-definitions/:id/specificationFileContent} : get the "id" processDefinition.
+     * {@code GET  /process-definitions/:idOrBpmnProcessDefinitionId/tenants} : get the "idOrBpmnProcessDefinitionId" processDefinition.
      *
-     * @param idOrBpmnProcessDefinitionId the id of the processDefinitionDTO to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the processDefinitionDTO, or with status {@code 404 (Not Found)}.
+     * @param idOrBpmnProcessDefinitionId the id of the processDefinitionDTO associated with Tenants.
+     * @return the list of tenantsDTO, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/process-definitions/{idOrBpmnProcessDefinitionId}/specificationFileContent")
-    public ResponseEntity<String> getProcessDefinitionSpecificationFileContent(@PathVariable String idOrBpmnProcessDefinitionId) {
-        log.debug("REST request to get ProcessDefinition : {}", idOrBpmnProcessDefinitionId);
-        Optional<String> specificationFileContent = processDefinitionService.findSpecificationFileContentByIdOrBpmnProcessDefinitionId(
-            idOrBpmnProcessDefinitionId
-        );
-        return ResponseUtil.wrapOrNotFound(specificationFileContent);
+    @GetMapping("/process-definitions/{idOrBpmnProcessDefinitionId}/active-deployments")
+    public List<ProcessDeploymentDTO> getActiveProcessDeployments(@PathVariable String idOrBpmnProcessDefinitionId) {
+        log.debug("REST request to get Tenants of the ProcessDefinition : {}", idOrBpmnProcessDefinitionId);
+        return processDeploymentService.findActiveByProcessDefinition(idOrBpmnProcessDefinitionId);
+    }
+
+    /**
+     * {@code GET  /process-definitions/:idOrBpmnProcessDefinitionId/deployments} : get the "idOrBpmnProcessDefinitionId" processDefinition.
+     *
+     * @param idOrBpmnProcessDefinitionId the id of the processDefinitionDTO owner of the ProcessDeployments.
+     * @return the list of processInstanceDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/process-definitions/{idOrBpmnProcessDefinitionId}/deployments")
+    public List<ProcessDeploymentDTO> getProcessDeployments(@PathVariable String idOrBpmnProcessDefinitionId) {
+        log.debug("REST request to get ProcessDeployments of the ProcessDefinition : {}", idOrBpmnProcessDefinitionId);
+        return processDeploymentService.findByProcessDefinition(idOrBpmnProcessDefinitionId);
     }
 
     /**
@@ -167,8 +134,8 @@ public class ProcessDefinitionResource {
         log.debug("REST request to delete ProcessDefinition : {}", id);
         processDefinitionService.delete(id);
         return ResponseEntity
-            .noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+                .noContent()
+                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+                .build();
     }
 }

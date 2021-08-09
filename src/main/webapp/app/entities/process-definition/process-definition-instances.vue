@@ -32,9 +32,7 @@
             <th scope="row"><span v-text="$t('myAppAgilekipCommunityApp.processInstance.status')">Status</span></th>
             <th scope="row"><span v-text="$t('myAppAgilekipCommunityApp.processInstance.startDate')">Start Date</span></th>
             <th scope="row"><span v-text="$t('myAppAgilekipCommunityApp.processInstance.endDate')">End Date</span></th>
-            <th scope="row">
-              <span v-text="$t('myAppAgilekipCommunityApp.processInstance.camundaDeploymentId')">Camunda Deployment Id</span>
-            </th>
+            <th scope="row"><span v-text="$t('myAppAgilekipCommunityApp.processInstance.camundaDeploymentId')">Camunda Deployment Id</span></th>
             <th scope="row">
               <span v-text="$t('myAppAgilekipCommunityApp.processInstance.camundaProcessDefinitionId')">Camunda Process Definition Id</span>
             </th>
@@ -86,3 +84,9 @@
 </template>
 
 <script lang="ts" src="./process-definition-instances.component.ts"></script>
+
+<style scoped>
+.table-responsive {
+  font-size: 90%;
+}
+</style>

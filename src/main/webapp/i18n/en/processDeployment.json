@@ -1,0 +1,33 @@
+{
+  "myAppAgilekipCommunityApp": {
+    "processDeployment": {
+      "home": {
+        "title": "Process Deployments",
+        "refreshListLabel": "Refresh list",
+        "notActiveProcessDeployment": "No active deployment found for this process",
+        "notInactiveProcessDeployment": "No inactive deployment found for this process"
+      },
+      "deploy": {
+        "title": "Deploy a Process"
+      },
+      "detail": {
+        "title": "Process Deployment Details",
+        "card-header": "Process Deployment"
+      },
+      "created": "A new Process Deployment with identifier {{ param }} was created successfully",
+      "specificationFile": "Specification File",
+      "tenant": "Tenant",
+      "status": "Status",
+      "camundaDeploymentMessage": "Camunda Deployment Message",
+      "camundaDeploymentId": "Camunda Deployment Id",
+      "camundaProcessDefinitionId": "Camunda Process Definition Id",
+      "deployDate": "Deployment",
+      "activationDate": "Activation",
+      "inactivationDate": "Inactivation",
+      "error": {
+        "bpmnProcessIsNotExecutable": "BPMN Process is not executable",
+        "bpmnNameNotProvided": "BPMN Process name not provided"
+      }
+    }
+  }
+}

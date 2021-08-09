@@ -18,12 +18,12 @@ export default class ProcessDefinitionService {
     });
   }
 
-  public findProcessInstances(idOrBpmnProcessDefinitionId: any): Promise<any> {
+  public findProcessDeployments(idOrBpmnProcessDefinitionId: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-        .get(`${baseApiUrl}/${idOrBpmnProcessDefinitionId}/instances`)
+        .get(`${baseApiUrl}/${idOrBpmnProcessDefinitionId}/deployments`)
         .then(res => {
-          resolve(res);
+          resolve(res.data);
         })
         .catch(err => {
           reject(err);
@@ -31,16 +31,30 @@ export default class ProcessDefinitionService {
     });
   }
 
-  public findSpecificationFileContent(idOrBpmnProcessDefinitionId: any): Promise<any> {
+  public findActiveProcessDeployments(idOrBpmnProcessDefinitionId: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-        .get(`${baseApiUrl}/${idOrBpmnProcessDefinitionId}/specificationFileContent`)
-        .then(res => {
-          resolve(res);
-        })
-        .catch(err => {
-          reject(err);
-        });
+          .get(`${baseApiUrl}/${idOrBpmnProcessDefinitionId}/active-deployments`)
+          .then(res => {
+            resolve(res.data);
+          })
+          .catch(err => {
+            reject(err);
+          });
+    });
+  }
+
+
+  public findProcessInstances(idOrBpmnProcessDefinitionId: any): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      axios
+          .get(`${baseApiUrl}/${idOrBpmnProcessDefinitionId}/instances`)
+          .then(res => {
+            resolve(res);
+          })
+          .catch(err => {
+            reject(err);
+          });
     });
   }
 
@@ -95,4 +109,5 @@ export default class ProcessDefinitionService {
         });
     });
   }
+
 }

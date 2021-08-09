@@ -9,9 +9,10 @@
         "createOrEditLabel": "Create or edit a Process Definition",
         "notFound": "No Process Definitions found"
       },
-      "created": "A new Process Definition is created with identifier {{ param }}",
-      "updated": "A Process Definition is updated with identifier {{ param }}",
-      "deleted": "A Process Definition is deleted with identifier {{ param }}",
+      "deploy": {
+        "title": "Deploy a Process"
+      },
+      "created": "A new Process Deployment with identifier {{ param }} was created successfully",
       "instantiated": "A new Process Instance was created successfully",
       "delete": {
         "question": "Are you sure you want to delete Process Definition <br/><strong>{{ id }}</strong>?"
@@ -24,10 +25,16 @@
       "description": "Description",
       "status": "Status",
       "specificationFile": "Specification File",
-      "camundaDeploymentMessage": "Deployment Message",
-      "camundaDeploymentId": "Deployment Id",
-      "camundaProcessDefinitionId": "Process Definition Id",
-      "bpmnProcessDefinitionId": "Bpmn Process Definition Id"
+      "camundaDeploymentMessage": "Camunda Deployment Message",
+      "camundaDeploymentId": "Camunda Deployment Id",
+      "camundaProcessDefinitionId": "Camunda Process Definition Id",
+      "bpmnProcessDefinitionId": "Bpmn Process Definition Id",
+      "canBeManuallyStarted": "Can be manually started",
+      "requireATenant": "Require a Tenant",
+      "error": {
+        "bpmnProcessIsNotExecutable": "BPMN Process is not executable",
+        "bpmnNameNotProvided": "BPMN Process name not provided"
+      }
     }
   }
 }

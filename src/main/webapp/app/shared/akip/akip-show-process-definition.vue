@@ -35,11 +35,6 @@
             {{ processDefinition.camundaDeploymentId }}
           </div>
         </div>
-        <div class="row">
-          <div class="col-12">
-            <akip-show-process-definition-bpmn-model :processDefinition="processDefinition"></akip-show-process-definition-bpmn-model>
-          </div>
-        </div>
         <div class="row summary-footer">
           <span class="footer-entry" v-if="processDefinition.createTime">
             <font-awesome-icon icon="clock"></font-awesome-icon>

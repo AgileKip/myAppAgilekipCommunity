@@ -20,8 +20,6 @@ public interface ProcessDefinitionMapper extends EntityMapper<ProcessDefinitionD
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     @Mapping(target = "name", source = "name")
-    @Mapping(target = "camundaDeploymentId", source = "camundaDeploymentId")
-    @Mapping(target = "camundaProcessDefinitionId", source = "camundaProcessDefinitionId")
     @Mapping(target = "bpmnProcessDefinitionId", source = "bpmnProcessDefinitionId")
     ProcessDefinitionDTO toDTOLoadTaskContext(ProcessDefinition processDefinition);
 }

@@ -5,22 +5,13 @@ import com.mycompany.myapp.domain.enumeration.StatusProcessDefinition;
 import com.mycompany.myapp.repository.ProcessDefinitionRepository;
 import com.mycompany.myapp.service.dto.ProcessDefinitionDTO;
 import com.mycompany.myapp.service.mapper.ProcessDefinitionMapper;
-import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import org.apache.commons.lang3.StringUtils;
-import org.camunda.bpm.engine.RepositoryService;
-import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
-import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
-import org.camunda.bpm.model.bpmn.instance.camunda.CamundaExecutionListener;
-import org.camunda.bpm.model.bpmn.instance.camunda.CamundaTaskListener;
-import org.camunda.bpm.model.xml.instance.ModelElementInstance;
 import org.camunda.bpm.model.xml.type.ModelElementType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,61 +25,28 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ProcessDefinitionService {
 
+    private static final String ENTITY_NAME = "processDefinition";
+
     private final Logger log = LoggerFactory.getLogger(ProcessDefinitionService.class);
 
     private final ProcessDefinitionRepository processDefinitionRepository;
 
     private final ProcessDefinitionMapper processDefinitionMapper;
 
-    private final RepositoryService repositoryService;
-
-    public ProcessDefinitionService(
-        ProcessDefinitionRepository processDefinitionRepository,
-        ProcessDefinitionMapper processDefinitionMapper,
-        RepositoryService repositoryService
-    ) {
+    public ProcessDefinitionService(ProcessDefinitionRepository processDefinitionRepository, ProcessDefinitionMapper processDefinitionMapper) {
         this.processDefinitionRepository = processDefinitionRepository;
         this.processDefinitionMapper = processDefinitionMapper;
-        this.repositoryService = repositoryService;
     }
 
-    /**
-     * Save a processDefinition.
-     *
-     * @param processDefinitionDTO the entity to save.
-     * @return the persisted entity.
-     */
-    public ProcessDefinitionDTO save(ProcessDefinitionDTO processDefinitionDTO) {
-        log.debug("Request to save ProcessDefinition : {}", processDefinitionDTO);
-        ProcessDefinition processDefinition = processDefinitionMapper.toEntity(processDefinitionDTO);
-        BpmnModelInstance modelInstance = Bpmn.readModelFromStream(new ByteArrayInputStream(processDefinition.getSpecificationFile()));
+    public ProcessDefinition createOrUpdateProcessDefinition(BpmnModelInstance bpmnModelInstance) {
+        Process process = extracAndValidProcessFromModel(bpmnModelInstance);
+        Optional<ProcessDefinition> optionalProcessDefinition = processDefinitionRepository.findByBpmnProcessDefinitionId(process.getId());
 
-        Process process = extracAndValidProcessFromModel(modelInstance);
-        processDefinition.setBpmnProcessDefinitionId(process.getId());
-        processDefinition.setName(process.getName());
-        if (!process.getDocumentations().isEmpty()) {
-            processDefinition.setDescription(process.getDocumentations().iterator().next().getRawTextContent());
+        if (optionalProcessDefinition.isPresent()) {
+            return updateProcessDefinition(process);
         }
 
-        configureListeners(modelInstance);
-
-        org.camunda.bpm.engine.repository.Deployment camundaDeployment = repositoryService
-            .createDeployment()
-            .addModelInstance(processDefinition.getBpmnProcessDefinitionId() + ".bpmn", modelInstance)
-            .name(processDefinition.getBpmnProcessDefinitionId())
-            .deploy();
-
-        org.camunda.bpm.engine.repository.ProcessDefinition camundaProcessDefinition = repositoryService
-            .createProcessDefinitionQuery()
-            .deploymentId(camundaDeployment.getId())
-            .singleResult();
-
-        processDefinition.setCamundaDeploymentId(camundaDeployment.getId());
-        processDefinition.setCamundaProcessDefinitionId(camundaProcessDefinition.getId());
-        processDefinition.setStatus(StatusProcessDefinition.ACTIVE);
-
-        processDefinition = processDefinitionRepository.save(processDefinition);
-        return processDefinitionMapper.toDto(processDefinition);
+        return createProcessDefinition(process);
     }
 
     private Process extracAndValidProcessFromModel(BpmnModelInstance modelInstance) {
@@ -96,96 +54,39 @@ public class ProcessDefinitionService {
         Process process = (Process) modelInstance.getModelElementsByType(processType).iterator().next();
 
         if (!process.isExecutable()) {
-            throw new BadRequestAlertException(
-                "BPMN Process is not executable",
-                "BPMN Process is not executable",
-                "BPMN Process is not executable"
-            );
+            throw new BadRequestAlertException("Model is not executable", ENTITY_NAME, "myAppAgilekipCommunityApp.processDefinition.error.bpmnProcessIsNotExecutable");
         }
 
         if (StringUtils.isBlank(process.getName())) {
-            throw new BadRequestAlertException(
-                "BPMN Process name not provided",
-                "BPMN Process name not provided",
-                "BPMN Process name not provided"
-            );
+            throw new BadRequestAlertException("Process name is not provided", ENTITY_NAME, "myAppAgilekipCommunityApp.processDefinition.error.bpmnNameNotProvided");
         }
 
         return process;
     }
 
-    private void configureListeners(BpmnModelInstance modelInstance) {
-        ModelElementType processType = modelInstance.getModel().getType(Process.class);
-        Process process = (Process) modelInstance.getModelElementsByType(processType).iterator().next();
-
-        if (process.getExtensionElements() == null) {
-            process.setExtensionElements(modelInstance.newInstance(ExtensionElements.class));
+    private ProcessDefinition createProcessDefinition(Process process) {
+        ProcessDefinition processDefinition = new ProcessDefinition();
+        processDefinition.setBpmnProcessDefinitionId(process.getId());
+        processDefinition.setName(process.getName());
+        processDefinition.setCanBeManuallyStarted(process.isCamundaStartableInTasklist());
+        processDefinition.setStatus(StatusProcessDefinition.ACTIVE);
+        if (!process.getDocumentations().isEmpty()) {
+            processDefinition.setDescription(process.getDocumentations().iterator().next().getRawTextContent());
         }
 
-        {
-            CamundaExecutionListener processInstanceEndListener = process
-                .getExtensionElements()
-                .addExtensionElement(CamundaExecutionListener.class);
-            processInstanceEndListener.setAttributeValue("event", "end");
-            processInstanceEndListener.setAttributeValue("delegateExpression", "${camundaProcessInstanceEndListener}");
+        return processDefinitionRepository.save(processDefinition);
+    }
+
+    private ProcessDefinition updateProcessDefinition(Process process) {
+        ProcessDefinition processDefinition = processDefinitionRepository.findByBpmnProcessDefinitionId(process.getId()).orElseThrow();
+        processDefinition.setName(process.getName());
+        processDefinition.setCanBeManuallyStarted(process.isCamundaStartableInTasklist());
+        processDefinition.setStatus(StatusProcessDefinition.ACTIVE);
+        if (!process.getDocumentations().isEmpty()) {
+            processDefinition.setDescription(process.getDocumentations().iterator().next().getRawTextContent());
         }
 
-        ModelElementType userTaskType = modelInstance.getModel().getType(UserTask.class);
-        Collection<ModelElementInstance> userTaskInstances = modelInstance.getModelElementsByType(userTaskType);
-
-        if (userTaskInstances == null) {
-            return;
-        }
-
-        userTaskInstances
-            .stream()
-            .forEach(
-                modelElementInstance -> {
-                    UserTask userTask = (UserTask) modelElementInstance;
-
-                    if (userTask.getExtensionElements() == null) {
-                        userTask.setExtensionElements(modelInstance.newInstance(ExtensionElements.class));
-                    }
-
-                    {
-                        CamundaTaskListener createListener = userTask.getExtensionElements().addExtensionElement(CamundaTaskListener.class);
-                        createListener.setAttributeValue("event", "create");
-                        createListener.setAttributeValue("delegateExpression", "${camundaTaskCreateListener}");
-                    }
-
-                    {
-                        CamundaTaskListener assigmentListener = userTask
-                            .getExtensionElements()
-                            .addExtensionElement(CamundaTaskListener.class);
-                        assigmentListener.setAttributeValue("event", "assignment");
-                        assigmentListener.setAttributeValue("delegateExpression", "${camundaTaskAssignmentListener}");
-                        userTask.getExtensionElements().getElements().add(assigmentListener);
-                    }
-
-                    {
-                        CamundaTaskListener completeListener = userTask
-                            .getExtensionElements()
-                            .addExtensionElement(CamundaTaskListener.class);
-                        completeListener.setAttributeValue("event", "complete");
-                        completeListener.setAttributeValue("delegateExpression", "${camundaTaskCompleteListener}");
-                        userTask.getExtensionElements().getElements().add(completeListener);
-                    }
-
-                    {
-                        CamundaTaskListener deleteListener = userTask.getExtensionElements().addExtensionElement(CamundaTaskListener.class);
-                        deleteListener.setAttributeValue("event", "delete");
-                        deleteListener.setAttributeValue("delegateExpression", "${camundaTaskDeleteListener}");
-                        userTask.getExtensionElements().getElements().add(deleteListener);
-                    }
-
-                    {
-                        CamundaTaskListener updateListener = userTask.getExtensionElements().addExtensionElement(CamundaTaskListener.class);
-                        updateListener.setAttributeValue("event", "update");
-                        updateListener.setAttributeValue("delegateExpression", "${camundaTaskUpdateListener}");
-                        userTask.getExtensionElements().getElements().add(updateListener);
-                    }
-                }
-            );
+        return processDefinitionRepository.save(processDefinition);
     }
 
     /**
@@ -197,10 +98,10 @@ public class ProcessDefinitionService {
     public List<ProcessDefinitionDTO> findAll() {
         log.debug("Request to get all ProcessDefinitions");
         return processDefinitionRepository
-            .findAll()
-            .stream()
-            .map(processDefinitionMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+                .findAll()
+                .stream()
+                .map(processDefinitionMapper::toDto)
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**
@@ -210,34 +111,12 @@ public class ProcessDefinitionService {
      * @return the entity.
      */
     @Transactional(readOnly = true)
-    public Optional<ProcessDefinitionDTO> findOne(String idOrBpmnProcessDefinitionId) {
-        log.debug("Request to get ProcessDefinition : {}", idOrBpmnProcessDefinitionId);
-        return findByIdOrBpmnProcessDefinitionId(idOrBpmnProcessDefinitionId).map(processDefinitionMapper::toDto);
-    }
-
-    /**
-     * Get the bpmn model of a processDefinition by id.
-     *
-     * @param idOrBpmnProcessDefinitionId the id of the entity.
-     * @return the bpmn model.
-     */
-    @Transactional(readOnly = true)
-    public Optional<String> findSpecificationFileContentByIdOrBpmnProcessDefinitionId(String idOrBpmnProcessDefinitionId) {
-        log.debug("Request to get ProcessDefinition : {}", idOrBpmnProcessDefinitionId);
-        Optional<ProcessDefinition> optionalProcessDefinition = findByIdOrBpmnProcessDefinitionId(idOrBpmnProcessDefinitionId);
-        if (optionalProcessDefinition.isPresent()) {
-            String specificationFileContent = new String(optionalProcessDefinition.get().getSpecificationFile(), StandardCharsets.UTF_8);
-            return Optional.of(specificationFileContent);
-        }
-        return Optional.empty();
-    }
-
-    private Optional<ProcessDefinition> findByIdOrBpmnProcessDefinitionId(String idOrBpmnProcessDefinitionId) {
+    public Optional<ProcessDefinitionDTO> findByIdOrBpmnProcessDefinitionId(String idOrBpmnProcessDefinitionId) {
         log.debug("Request to get ProcessDefinition : {}", idOrBpmnProcessDefinitionId);
         if (StringUtils.isNumeric(idOrBpmnProcessDefinitionId)) {
-            return processDefinitionRepository.findById(Long.parseLong(idOrBpmnProcessDefinitionId));
+            return processDefinitionRepository.findById(Long.parseLong(idOrBpmnProcessDefinitionId)).map(processDefinitionMapper::toDto);
         }
-        return processDefinitionRepository.findByBpmnProcessDefinitionId(idOrBpmnProcessDefinitionId);
+        return processDefinitionRepository.findByBpmnProcessDefinitionId(idOrBpmnProcessDefinitionId).map(processDefinitionMapper::toDto);
     }
 
     /**
@@ -248,30 +127,5 @@ public class ProcessDefinitionService {
     public void delete(Long id) {
         log.debug("Request to delete ProcessDefinition : {}", id);
         processDefinitionRepository.deleteById(id);
-    }
-
-    public static void main(String[] args) {
-        try {
-            File f = new File(
-                "/Users/utelemaco/development/workspaceProcesshub/processhub-bpmnr-ri/src/main/resources/process-definitions/my-simple-process.bpmn"
-            );
-            FileInputStream fis = new FileInputStream(f);
-            BpmnModelInstance modelInstance = Bpmn.readModelFromStream(fis);
-
-            ProcessDefinitionService processDefinitionService = new ProcessDefinitionService(null, null, null);
-            Process process = processDefinitionService.extracAndValidProcessFromModel(modelInstance);
-            if (!process.getDocumentations().isEmpty()) {
-                System.out.println(process.getDocumentations().iterator().next().getRawTextContent());
-            }
-
-            Iterator<Documentation> documentationIterator = process.getDocumentations().iterator();
-            while (documentationIterator.hasNext()) {
-                Documentation d = documentationIterator.next();
-                System.out.println(d.getTextFormat());
-                System.out.println(d.getRawTextContent());
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
     }
 }

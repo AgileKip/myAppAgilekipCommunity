@@ -34,26 +34,11 @@ public class ProcessDefinition implements Serializable {
     @Column(name = "status")
     private StatusProcessDefinition status;
 
-    @Lob
-    @Column(name = "specification_file")
-    private byte[] specificationFile;
-
-    @Column(name = "specification_file_content_type")
-    private String specificationFileContentType;
-
-    @Lob
-    @Type(type = "org.hibernate.type.TextType")
-    @Column(name = "camunda_deployment_message")
-    private String camundaDeploymentMessage;
-
-    @Column(name = "camunda_deployment_id")
-    private String camundaDeploymentId;
-
-    @Column(name = "camunda_process_definition_id")
-    private String camundaProcessDefinitionId;
-
     @Column(name = "bpmn_process_definition_id")
     private String bpmnProcessDefinitionId;
+
+    @Column(name = "can_be_manually_started")
+    private Boolean canBeManuallyStarted;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -108,71 +93,6 @@ public class ProcessDefinition implements Serializable {
         this.status = status;
     }
 
-    public byte[] getSpecificationFile() {
-        return this.specificationFile;
-    }
-
-    public ProcessDefinition specificationFile(byte[] specificationFile) {
-        this.specificationFile = specificationFile;
-        return this;
-    }
-
-    public void setSpecificationFile(byte[] specificationFile) {
-        this.specificationFile = specificationFile;
-    }
-
-    public String getSpecificationFileContentType() {
-        return this.specificationFileContentType;
-    }
-
-    public ProcessDefinition specificationFileContentType(String specificationFileContentType) {
-        this.specificationFileContentType = specificationFileContentType;
-        return this;
-    }
-
-    public void setSpecificationFileContentType(String specificationFileContentType) {
-        this.specificationFileContentType = specificationFileContentType;
-    }
-
-    public String getCamundaDeploymentMessage() {
-        return this.camundaDeploymentMessage;
-    }
-
-    public ProcessDefinition camundaDeploymentMessage(String camundaDeploymentMessage) {
-        this.camundaDeploymentMessage = camundaDeploymentMessage;
-        return this;
-    }
-
-    public void setCamundaDeploymentMessage(String camundaDeploymentMessage) {
-        this.camundaDeploymentMessage = camundaDeploymentMessage;
-    }
-
-    public String getCamundaDeploymentId() {
-        return this.camundaDeploymentId;
-    }
-
-    public ProcessDefinition camundaDeploymentId(String camundaDeploymentId) {
-        this.camundaDeploymentId = camundaDeploymentId;
-        return this;
-    }
-
-    public void setCamundaDeploymentId(String camundaDeploymentId) {
-        this.camundaDeploymentId = camundaDeploymentId;
-    }
-
-    public String getCamundaProcessDefinitionId() {
-        return this.camundaProcessDefinitionId;
-    }
-
-    public ProcessDefinition camundaProcessDefinitionId(String camundaProcessDefinitionId) {
-        this.camundaProcessDefinitionId = camundaProcessDefinitionId;
-        return this;
-    }
-
-    public void setCamundaProcessDefinitionId(String camundaProcessDefinitionId) {
-        this.camundaProcessDefinitionId = camundaProcessDefinitionId;
-    }
-
     public String getBpmnProcessDefinitionId() {
         return this.bpmnProcessDefinitionId;
     }
@@ -184,6 +104,14 @@ public class ProcessDefinition implements Serializable {
 
     public void setBpmnProcessDefinitionId(String bpmnProcessDefinitionId) {
         this.bpmnProcessDefinitionId = bpmnProcessDefinitionId;
+    }
+
+    public Boolean getCanBeManuallyStarted() {
+        return canBeManuallyStarted;
+    }
+
+    public void setCanBeManuallyStarted(Boolean canBeManuallyStarted) {
+        this.canBeManuallyStarted = canBeManuallyStarted;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

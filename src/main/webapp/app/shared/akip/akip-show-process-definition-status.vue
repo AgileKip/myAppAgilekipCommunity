@@ -17,7 +17,8 @@
   font-size: 90%;
 }
 
-.bg-active, .bg-new {
+.bg-active,
+.bg-new {
   color: white;
   background-color: green;
 }
@@ -31,5 +32,4 @@
   color: white;
   background-color: darkred;
 }
-
 </style>

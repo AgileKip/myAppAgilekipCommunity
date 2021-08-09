@@ -8,14 +8,14 @@
           <span v-text="$t('myAppAgilekipCommunityApp.processDefinition.home.refreshListLabel')">Refresh List</span>
         </button>
         <router-link
-          :to="{ name: 'ProcessDefinitionCreate' }"
+          :to="{ name: 'ProcessDefinitionDeploy' }"
           tag="button"
           id="jh-create-entity"
           data-cy="entityCreateButton"
           class="btn btn-primary jh-create-entity create-process-definition"
         >
           <font-awesome-icon icon="plus"></font-awesome-icon>
-          <span v-text="$t('myAppAgilekipCommunityApp.processDefinition.home.createLabel')"> Create a new Process Definition </span>
+          <span v-text="$t('myAppAgilekipCommunityApp.processDefinition.deploy.title')">Deploy a Process</span>
         </router-link>
       </div>
     </h2>
@@ -30,14 +30,6 @@
             <th scope="row"><span v-text="$t('global.field.id')">ID</span></th>
             <th scope="row"><span v-text="$t('myAppAgilekipCommunityApp.processDefinition.name')">Name</span></th>
             <th scope="row">
-              <span v-text="$t('myAppAgilekipCommunityApp.processDefinition.camundaDeploymentId')">Camunda Deployment Id</span>
-            </th>
-            <th scope="row">
-              <span v-text="$t('myAppAgilekipCommunityApp.processDefinition.camundaProcessDefinitionId')"
-                >Camunda Process Definition Id</span
-              >
-            </th>
-            <th scope="row">
               <span v-text="$t('myAppAgilekipCommunityApp.processDefinition.bpmnProcessDefinitionId')">Bpmn Process Definition Id</span>
             </th>
             <th scope="row"></th>
@@ -51,14 +43,36 @@
               }}</router-link>
             </td>
             <td>{{ processDefinition.name }}</td>
-            <td>{{ processDefinition.camundaDeploymentId }}</td>
-            <td>{{ processDefinition.camundaProcessDefinitionId }}</td>
             <td>{{ processDefinition.bpmnProcessDefinitionId }}</td>
             <td class="text-right">
               <div class="btn-group">
-                <akip-button-process-definition-init :processDefinition="processDefinition"></akip-button-process-definition-init>
+                <router-link
+                  :to="`/process-definition/${processDefinition.bpmnProcessDefinitionId}/init`"
+                  tag="button"
+                  class="btn btn-success btn-sm details"
+                  :disabled="!processDefinition.canBeManuallyStarted"
+                >
+                  <font-awesome-icon icon="play"></font-awesome-icon>
+                  <span class="d-none d-md-inline">Init</span>
+                </router-link>
 
-                <akip-button-process-definition-instances :processDefinition="processDefinition"></akip-button-process-definition-instances>
+                <router-link
+                    :to="`/process-definition/${processDefinition.bpmnProcessDefinitionId}/deployments`"
+                    tag="button"
+                    class="btn btn-primary btn-sm details"
+                >
+                  <font-awesome-icon icon="list"></font-awesome-icon>
+                  <span class="d-none d-md-inline">Deployments</span>
+                </router-link>
+
+                <router-link
+                  :to="`/process-definition/${processDefinition.bpmnProcessDefinitionId}/instances`"
+                  tag="button"
+                  class="btn btn-secondary btn-sm details"
+                >
+                  <font-awesome-icon icon="list"></font-awesome-icon>
+                  <span class="d-none d-md-inline">Instances</span>
+                </router-link>
 
                 <router-link
                   :to="{ name: 'ProcessDefinitionView', params: { processDefinitionId: processDefinition.bpmnProcessDefinitionId } }"
@@ -68,16 +82,6 @@
                 >
                   <font-awesome-icon icon="eye"></font-awesome-icon>
                   <span class="d-none d-md-inline" v-text="$t('entity.action.view')">View</span>
-                </router-link>
-
-                <router-link
-                  :to="{ name: 'ProcessDefinitionEdit', params: { processDefinitionId: processDefinition.bpmnProcessDefinitionId } }"
-                  tag="button"
-                  class="btn btn-primary btn-sm edit"
-                  data-cy="entityEditButton"
-                >
-                  <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
-                  <span class="d-none d-md-inline" v-text="$t('entity.action.edit')">Edit</span>
                 </router-link>
 
                 <b-button
@@ -106,10 +110,7 @@
         ></span
       >
       <div class="modal-body">
-        <p
-          id="jhi-delete-processDefinition-heading"
-          v-html="$t('myAppAgilekipCommunityApp.processDefinition.delete.question', { id: removeId })"
-        >
+        <p id="jhi-delete-processDefinition-heading" v-html="$t('myAppAgilekipCommunityApp.processDefinition.delete.question', { id: removeId })">
           Are you sure you want to delete this Process Definition?
         </p>
       </div>

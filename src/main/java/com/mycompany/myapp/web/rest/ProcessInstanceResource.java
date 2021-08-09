@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.service.ProcessInstanceService;
 import com.mycompany.myapp.service.TaskInstanceService;
+import com.mycompany.myapp.service.dto.ProcessInstanceBpmnModelDTO;
 import com.mycompany.myapp.service.dto.ProcessInstanceDTO;
 import com.mycompany.myapp.service.dto.TaskInstanceDTO;
 import java.net.URI;
@@ -90,5 +91,18 @@ public class ProcessInstanceResource {
         log.debug("REST request to get ProcessInstance : {}", id);
         Optional<ProcessInstanceDTO> processInstanceDTO = processInstanceService.findOne(id);
         return ResponseUtil.wrapOrNotFound(processInstanceDTO);
+    }
+
+    /**
+     * {@code GET  /process-instances/:id/bpmnModel} : get the bpmn model for the "id" processInstance.
+     *
+     * @param id the id of the processInstanceDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the processInstanceDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/process-instances/{id}/bpmnModel")
+    public ResponseEntity<ProcessInstanceBpmnModelDTO> getProcessInstanceBpmnModel(@PathVariable Long id) {
+        log.debug("REST request to get the BPMNModel of the ProcessInstance : {}", id);
+        Optional<ProcessInstanceBpmnModelDTO> processInstanceBpmnModelDTO = processInstanceService.findBpmnModel(id);
+        return ResponseUtil.wrapOrNotFound(processInstanceBpmnModelDTO);
     }
 }

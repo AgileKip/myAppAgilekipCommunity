@@ -25,10 +25,11 @@ import VueMarkdown from 'vue-markdown';
 import AkipButtonProcessDefinitionInitComponent from '@/shared/akip/akip-button-process-definition-init.vue';
 import AkipButtonProcessDefinitionInstancesComponent from '@/shared/akip/akip-button-process-definition-instances.vue';
 import AkipShowProcessDefinitionComponent from '@/shared/akip/akip-show-process-definition.vue';
-import AkipShowProcessDefinitionBpmnModelComponent from '@/shared/akip/akip-show-process-definition-bpmn-model.vue';
 import AkipShowProcessDefinitionStatusComponent from '@/shared/akip/akip-show-process-definition-status.vue';
+import AkipShowProcessDeploymentBpmnModelComponent from "@/shared/akip/akip-show-process-deployment-bpmn-model.vue";
+import AkipShowProcessDeploymentStatusComponent from '@/shared/akip/akip-show-process-deployment-status.vue';
 import AkipShowProcessInstanceComponent from '@/shared/akip/akip-show-process-instance.vue';
-import AkipShowProcessInstanceBpmnModelComponent from '@/shared/akip/akip-show-process-instance-bpmn-model.vue';
+import AkipShowProcessInstanceBpmnModelComponent from "@/shared/akip/akip-show-process-instance-bpmn-model.vue";
 import AkipShowProcessInstanceStatusComponent from '@/shared/akip/akip-show-process-instance-status.vue';
 import AkipShowTaskInstanceComponent from '@/shared/akip/akip-show-task-instance.vue';
 import AkipShowTaskInstanceStatusComponent from '@/shared/akip/akip-show-task-instance-status.vue';
@@ -42,6 +43,7 @@ import UserOAuth2Service from '@/entities/user/user.oauth2.service';
 /* tslint:disable */
 
 import ProcessDefinitionService from '@/entities/process-definition/process-definition.service';
+import ProcessDeploymentService from '@/entities/process-deployment/process-deployment.service';
 import ProcessInstanceService from '@/entities/process-instance/process-instance.service';
 import TaskInstanceService from '@/entities/task-instance/task-instance.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
@@ -62,8 +64,9 @@ Vue.component('vue-markdown', VueMarkdown);
 Vue.component('akip-button-process-definition-init', AkipButtonProcessDefinitionInitComponent);
 Vue.component('akip-button-process-definition-instances', AkipButtonProcessDefinitionInstancesComponent);
 Vue.component('akip-show-process-definition', AkipShowProcessDefinitionComponent);
-Vue.component('akip-show-process-definition-bpmn-model', AkipShowProcessDefinitionBpmnModelComponent);
 Vue.component('akip-show-process-definition-status', AkipShowProcessDefinitionStatusComponent);
+Vue.component('akip-show-process-deployment-bpmn-model', AkipShowProcessDeploymentBpmnModelComponent);
+Vue.component('akip-show-process-deployment-status', AkipShowProcessDeploymentStatusComponent);
 Vue.component('akip-show-process-instance', AkipShowProcessInstanceComponent);
 Vue.component('akip-show-process-instance-bpmn-model', AkipShowProcessInstanceBpmnModelComponent);
 Vue.component('akip-show-process-instance-status', AkipShowProcessInstanceStatusComponent);
@@ -118,6 +121,7 @@ new Vue({
     userOAuth2Service: () => new UserOAuth2Service(),
     translationService: () => translationService,
     processDefinitionService: () => new ProcessDefinitionService(),
+    processDeploymentService: () => new ProcessDeploymentService(),
     processInstanceService: () => new ProcessInstanceService(),
     taskInstanceService: () => new TaskInstanceService(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here

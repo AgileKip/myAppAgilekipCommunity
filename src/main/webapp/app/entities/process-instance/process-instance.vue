@@ -1,8 +1,8 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="ProcessInstanceHeading">
-      <span v-text="$t('myAppAgilekipCommunityApp.processInstance.home.title')" id="process-instance-heading">Process Instances</span>
-      <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-between">
+        <span v-text="$t('myAppAgilekipCommunityApp.processInstance.home.title')" id="process-instance-heading">Process Instances</span>
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
           <span v-text="$t('myAppAgilekipCommunityApp.processInstance.home.refreshListLabel')">Refresh List</span>

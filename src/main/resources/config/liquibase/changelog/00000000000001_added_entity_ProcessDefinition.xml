@@ -23,22 +23,10 @@
             <column name="status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="specification_file" type="longblob">
-                <constraints nullable="true" />
-            </column>
-            <column name="specification_file_content_type" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="camunda_deployment_message" type="${clobType}">
-                <constraints nullable="true" />
-            </column>
-            <column name="camunda_deployment_id" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="camunda_process_definition_id" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="bpmn_process_definition_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="can_be_manually_started" type="bit">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

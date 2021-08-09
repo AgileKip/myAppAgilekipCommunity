@@ -51,7 +51,7 @@ export default class ProcessDefinition extends mixins(JhiDataUtils) {
   }
 
   public prepareRemove(instance: IProcessDefinition): void {
-    this.removeId = instance.bpmnProcessDefinitionId;
+    this.removeId = instance.id;
     if (<any>this.$refs.removeEntity) {
       (<any>this.$refs.removeEntity).show();
     }

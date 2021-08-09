@@ -19,19 +19,9 @@ public class ProcessDefinitionDTO implements Serializable {
 
     private StatusProcessDefinition status;
 
-    @Lob
-    private byte[] specificationFile;
-
-    private String specificationFileContentType;
-
-    @Lob
-    private String camundaDeploymentMessage;
-
-    private String camundaDeploymentId;
-
-    private String camundaProcessDefinitionId;
-
     private String bpmnProcessDefinitionId;
+
+    private Boolean canBeManuallyStarted;
 
     public Long getId() {
         return id;
@@ -65,52 +55,20 @@ public class ProcessDefinitionDTO implements Serializable {
         this.status = status;
     }
 
-    public byte[] getSpecificationFile() {
-        return specificationFile;
-    }
-
-    public void setSpecificationFile(byte[] specificationFile) {
-        this.specificationFile = specificationFile;
-    }
-
-    public String getSpecificationFileContentType() {
-        return specificationFileContentType;
-    }
-
-    public void setSpecificationFileContentType(String specificationFileContentType) {
-        this.specificationFileContentType = specificationFileContentType;
-    }
-
-    public String getCamundaDeploymentMessage() {
-        return camundaDeploymentMessage;
-    }
-
-    public void setCamundaDeploymentMessage(String camundaDeploymentMessage) {
-        this.camundaDeploymentMessage = camundaDeploymentMessage;
-    }
-
-    public String getCamundaDeploymentId() {
-        return camundaDeploymentId;
-    }
-
-    public void setCamundaDeploymentId(String camundaDeploymentId) {
-        this.camundaDeploymentId = camundaDeploymentId;
-    }
-
-    public String getCamundaProcessDefinitionId() {
-        return camundaProcessDefinitionId;
-    }
-
-    public void setCamundaProcessDefinitionId(String camundaProcessDefinitionId) {
-        this.camundaProcessDefinitionId = camundaProcessDefinitionId;
-    }
-
     public String getBpmnProcessDefinitionId() {
         return bpmnProcessDefinitionId;
     }
 
     public void setBpmnProcessDefinitionId(String bpmnProcessDefinitionId) {
         this.bpmnProcessDefinitionId = bpmnProcessDefinitionId;
+    }
+
+    public Boolean getCanBeManuallyStarted() {
+        return canBeManuallyStarted;
+    }
+
+    public void setCanBeManuallyStarted(Boolean canBeManuallyStarted) {
+        this.canBeManuallyStarted = canBeManuallyStarted;
     }
 
     @Override

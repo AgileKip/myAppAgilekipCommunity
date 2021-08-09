@@ -22,7 +22,9 @@
   background-color: green;
 }
 
-.bg-completed, .bg-terminated, .bg-canceled {
+.bg-completed,
+.bg-terminated,
+.bg-canceled {
   color: white;
   background-color: #586069;
 }
