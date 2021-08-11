@@ -5,7 +5,7 @@ export interface IProcessDefinition {
   description?: string | null;
   status?: StatusProcessDefinition | null;
   bpmnProcessDefinitionId?: string | null;
-  canBeManuallyStarted?:boolean | null;
+  canBeManuallyStarted?: boolean | null;
 }
 
 export class ProcessDefinition implements IProcessDefinition {
@@ -15,6 +15,6 @@ export class ProcessDefinition implements IProcessDefinition {
     public description?: string | null,
     public status?: StatusProcessDefinition | null,
     public bpmnProcessDefinitionId?: string | null,
-    public canBeManuallyStarted?:boolean | null,
+    public canBeManuallyStarted?: boolean | null
   ) {}
 }

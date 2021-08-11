@@ -2,14 +2,13 @@ package com.mycompany.myapp.repository;
 
 import com.mycompany.myapp.domain.ProcessDeployment;
 import com.mycompany.myapp.domain.enumeration.StatusProcessDeployment;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Spring Data SQL repository for the ProcessDeployment entity.
@@ -17,12 +16,13 @@ import java.util.Optional;
 @SuppressWarnings("unused")
 @Repository
 public interface ProcessDeploymentRepository extends JpaRepository<ProcessDeployment, Long> {
-
     List<ProcessDeployment> findByProcessDefinitionId(Long processDefinitionId);
 
     Optional<ProcessDeployment> findByCamundaProcessDefinitionId(String camundaProcessDefinitionId);
 
-    @Query("from ProcessDeployment where processDefinition.id = ?1 and status = com.mycompany.myapp.domain.enumeration.StatusProcessDeployment.ACTIVE")
+    @Query(
+        "from ProcessDeployment where processDefinition.id = ?1 and status = com.mycompany.myapp.domain.enumeration.StatusProcessDeployment.ACTIVE"
+    )
     Optional<ProcessDeployment> findByProcessDefinitionIdAndStatusIsActive(Long processDefinitionId);
 
     @Modifying
@@ -36,7 +36,4 @@ public interface ProcessDeploymentRepository extends JpaRepository<ProcessDeploy
     @Modifying
     @Query("update ProcessDeployment set inactivationDate = ?1 where id = ?2")
     void updateInactivationDateById(LocalDateTime localDateTime, Long id);
-
-
-
 }

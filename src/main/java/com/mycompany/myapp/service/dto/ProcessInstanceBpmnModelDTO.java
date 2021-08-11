@@ -73,7 +73,7 @@ public class ProcessInstanceBpmnModelDTO implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "ProcessDeploymentBpmnModelDTO{" +
+        return "ProcessInstanceBpmnModelDTO{" +
             "id=" + getId() +
             "}";
     }

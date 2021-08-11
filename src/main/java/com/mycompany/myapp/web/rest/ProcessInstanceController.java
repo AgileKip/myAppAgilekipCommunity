@@ -22,9 +22,9 @@ import tech.jhipster.web.util.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class ProcessInstanceResource {
+public class ProcessInstanceController {
 
-    private final Logger log = LoggerFactory.getLogger(ProcessInstanceResource.class);
+    private final Logger log = LoggerFactory.getLogger(ProcessInstanceController.class);
 
     private static final String ENTITY_NAME = "processInstance";
 
@@ -35,7 +35,7 @@ public class ProcessInstanceResource {
 
     private final TaskInstanceService taskInstanceService;
 
-    public ProcessInstanceResource(ProcessInstanceService processInstanceService, TaskInstanceService taskInstanceService) {
+    public ProcessInstanceController(ProcessInstanceService processInstanceService, TaskInstanceService taskInstanceService) {
         this.processInstanceService = processInstanceService;
         this.taskInstanceService = taskInstanceService;
     }

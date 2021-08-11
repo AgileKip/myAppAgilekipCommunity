@@ -3,15 +3,15 @@ import { Component, Inject } from 'vue-property-decorator';
 import { mixins } from 'vue-class-component';
 import JhiDataUtils from '@/shared/data/data-utils.service';
 
-import NotifyMixin from "@/shared/notify/notify.mixin";
-import ProcessDeploymentService from "@/entities/process-definition/process-deployment.service";
-import { IProcessDeployment, ProcessDeployment } from "@/shared/model/process-deployment.model";
-import { required } from "vuelidate/lib/validators";
+import NotifyMixin from '@/shared/notify/notify.mixin';
+import ProcessDeploymentService from '@/entities/process-deployment/process-deployment.service';
+import { IProcessDeployment, ProcessDeployment } from '@/shared/model/process-deployment.model';
+import { required } from 'vuelidate/lib/validators';
 
 const validations: any = {
   processDeployment: {
     specificationFile: {
-      required
+      required,
     },
   },
 };
@@ -44,5 +44,4 @@ export default class ProcessDefinitionDeploy extends mixins(JhiDataUtils, Notify
   public previousState(): void {
     this.$router.go(-1);
   }
-
 }

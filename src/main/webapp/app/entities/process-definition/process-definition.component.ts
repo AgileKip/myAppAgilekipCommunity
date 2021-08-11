@@ -8,7 +8,6 @@ import JhiDataUtils from '@/shared/data/data-utils.service';
 
 import ProcessDefinitionService from './process-definition.service';
 import { ITaskInstance } from '@/shared/model/task-instance.model';
-import entities from '@/router/entities';
 
 @Component({
   mixins: [Vue2Filters.mixin],
@@ -16,7 +15,7 @@ import entities from '@/router/entities';
 export default class ProcessDefinition extends mixins(JhiDataUtils) {
   @Inject('processDefinitionService') private processDefinitionService: () => ProcessDefinitionService;
 
-  private removeId: any = null;
+  private processDefinitionToRemove: IProcessDefinition = null;
 
   public processDefinitions: IProcessDefinition[] = [];
 
@@ -50,8 +49,8 @@ export default class ProcessDefinition extends mixins(JhiDataUtils) {
     this.clear();
   }
 
-  public prepareRemove(instance: IProcessDefinition): void {
-    this.removeId = instance.id;
+  public prepareRemove(processDefinition: IProcessDefinition): void {
+    this.processDefinitionToRemove = processDefinition;
     if (<any>this.$refs.removeEntity) {
       (<any>this.$refs.removeEntity).show();
     }
@@ -59,9 +58,9 @@ export default class ProcessDefinition extends mixins(JhiDataUtils) {
 
   public removeProcessDefinition(): void {
     this.processDefinitionService()
-      .delete(this.removeId)
+      .delete(this.processDefinitionToRemove.id)
       .then(() => {
-        const message = this.$t('myAppAgilekipCommunityApp.processDefinition.deleted', { param: this.removeId });
+        const message = this.$t('myAppAgilekipCommunityApp.processDefinition.deleted', { param: this.processDefinitionToRemove.name });
         this.$bvToast.toast(message.toString(), {
           toaster: 'b-toaster-top-center',
           title: 'Info',
@@ -69,7 +68,7 @@ export default class ProcessDefinition extends mixins(JhiDataUtils) {
           solid: true,
           autoHideDelay: 5000,
         });
-        this.removeId = null;
+        this.processDefinitionToRemove = null;
         this.retrieveAllProcessDefinitions();
         this.closeDialog();
       });

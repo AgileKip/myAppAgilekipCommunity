@@ -7,14 +7,16 @@
       </span>
     </h5>
     <div class="card-body">
-      <div class="xcontainer">
-        <div class="row px-3">
+      <div>
+        <div class="row px-3 mb-3" v-if="processDefinition.description">
           <div class="col-sm description">
             <div v-if="processDefinition.description">
               <vue-markdown>{{ processDefinition.description }}</vue-markdown>
             </div>
-            <slot name="body"></slot>
           </div>
+        </div>
+        <div class="row">
+          <slot name="body"></slot>
         </div>
         <div class="row summary mt-3">
           <div class="col-sm">
@@ -22,17 +24,6 @@
               BPMN Process Definition Id </span
             >:
             {{ processDefinition.bpmnProcessDefinitionId }}
-          </div>
-          <div class="col-sm">
-            <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDefinition.camundaProcessDefinitionId')">
-              Camunda Process Definition Id </span
-            >:
-            {{ processDefinition.camundaProcessDefinitionId }}
-          </div>
-          <div class="col-sm">
-            <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDefinition.camundaDeploymentId')"> Camunda Deployment Id </span
-            >:
-            {{ processDefinition.camundaDeploymentId }}
           </div>
         </div>
         <div class="row summary-footer">

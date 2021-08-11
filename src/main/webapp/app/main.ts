@@ -26,10 +26,10 @@ import AkipButtonProcessDefinitionInitComponent from '@/shared/akip/akip-button-
 import AkipButtonProcessDefinitionInstancesComponent from '@/shared/akip/akip-button-process-definition-instances.vue';
 import AkipShowProcessDefinitionComponent from '@/shared/akip/akip-show-process-definition.vue';
 import AkipShowProcessDefinitionStatusComponent from '@/shared/akip/akip-show-process-definition-status.vue';
-import AkipShowProcessDeploymentBpmnModelComponent from "@/shared/akip/akip-show-process-deployment-bpmn-model.vue";
+import AkipShowProcessDeploymentBpmnModelComponent from '@/shared/akip/akip-show-process-deployment-bpmn-model.vue';
 import AkipShowProcessDeploymentStatusComponent from '@/shared/akip/akip-show-process-deployment-status.vue';
 import AkipShowProcessInstanceComponent from '@/shared/akip/akip-show-process-instance.vue';
-import AkipShowProcessInstanceBpmnModelComponent from "@/shared/akip/akip-show-process-instance-bpmn-model.vue";
+import AkipShowProcessInstanceBpmnModelComponent from '@/shared/akip/akip-show-process-instance-bpmn-model.vue';
 import AkipShowProcessInstanceStatusComponent from '@/shared/akip/akip-show-process-instance-status.vue';
 import AkipShowTaskInstanceComponent from '@/shared/akip/akip-show-task-instance.vue';
 import AkipShowTaskInstanceStatusComponent from '@/shared/akip/akip-show-task-instance-status.vue';

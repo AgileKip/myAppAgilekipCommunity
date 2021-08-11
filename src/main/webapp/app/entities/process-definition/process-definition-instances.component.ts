@@ -50,7 +50,7 @@ export default class ProcessDefinitionInstances extends Vue {
       .findProcessInstances(this.processDefinitionId)
       .then(
         res => {
-          this.processInstances = res.data;
+          this.processInstances = res;
           this.isFetchingProcessInstances = false;
         },
         err => {

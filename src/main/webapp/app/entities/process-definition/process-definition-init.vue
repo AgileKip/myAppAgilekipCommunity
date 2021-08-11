@@ -11,23 +11,20 @@
         </h2>
         <akip-show-process-definition :processDefinition="processDefinition">
           <template v-slot:body>
-
             <hr />
-            <div class="form-group row">
-              <div class="col-sm-9">
-                <label class="form-control-label" v-text="$t('myAppAgilekipCommunityApp.processInstance.businessKey')" for="businessKey"
-                  >Business Key</label
-                >
-                <input
-                  type="text"
-                  class="form-control form-control-sm"
-                  name="businessKey"
-                  id="businessKey"
-                  data-cy="businessKey"
-                  :class="{ valid: !$v.processInstance.businessKey.$invalid, invalid: $v.processInstance.businessKey.$invalid }"
-                  v-model="$v.processInstance.businessKey.$model"
-                />
-              </div>
+            <div class="col-sm form-group">
+              <label class="form-control-label" v-text="$t('myAppAgilekipCommunityApp.processInstance.businessKey')" for="businessKey"
+                >Business Key</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="businessKey"
+                id="businessKey"
+                data-cy="businessKey"
+                :class="{ valid: !$v.processInstance.businessKey.$invalid, invalid: $v.processInstance.businessKey.$invalid }"
+                v-model="$v.processInstance.businessKey.$model"
+              />
             </div>
           </template>
         </akip-show-process-definition>

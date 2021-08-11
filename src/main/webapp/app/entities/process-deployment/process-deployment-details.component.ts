@@ -1,8 +1,8 @@
-import {Component, Inject, Vue} from 'vue-property-decorator';
+import { Component, Inject, Vue } from 'vue-property-decorator';
 
-import {IProcessDeployment} from "@/shared/model/process-deployment.model";
+import { IProcessDeployment } from '@/shared/model/process-deployment.model';
+import { StatusProcessDeployment } from '@/shared/model/enumerations/status-process-deployment.model';
 import ProcessDeploymentService from './process-deployment.service';
-import {StatusProcessDeployment} from "@/shared/model/enumerations/status-process-deployment.model";
 
 @Component
 export default class ProcessDeploymentDetails extends Vue {
@@ -14,7 +14,7 @@ export default class ProcessDeploymentDetails extends Vue {
 
   public collapseController: any = { showProcess: true, showInstances: true };
 
-  public collapse(collapseComponent:string):void {
+  public collapse(collapseComponent: string): void {
     this.collapseController[collapseComponent] = !this.collapseController[collapseComponent];
   }
 

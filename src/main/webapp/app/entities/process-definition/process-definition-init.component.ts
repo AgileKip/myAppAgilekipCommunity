@@ -5,7 +5,6 @@ import ProcessDefinitionService from './process-definition.service';
 import { IProcessInstance, ProcessInstance } from '@/shared/model/process-instance.model';
 import ProcessInstanceService from '@/entities/process-instance/process-instance.service';
 import { maxLength, minLength, required } from 'vuelidate/lib/validators';
-import { IProcessDeployment } from "@/shared/model/process-deployment.model";
 
 const validations: any = {
   processInstance: {
@@ -24,7 +23,6 @@ export default class ProcessDefinitionInit extends Vue {
   @Inject('processDefinitionService') private processDefinitionService: () => ProcessDefinitionService;
   @Inject('processInstanceService') private processInstanceService: () => ProcessInstanceService;
   public processDefinition: IProcessDefinition = new ProcessDefinition();
-  public activeProcessDeployments: IProcessDeployment[] = [];
   public processInstance: IProcessInstance = new ProcessInstance();
   public isSaving = false;
   public currentLanguage = '';

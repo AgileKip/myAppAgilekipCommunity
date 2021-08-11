@@ -8,6 +8,9 @@ import com.mycompany.myapp.service.dto.ProcessDefinitionDTO;
 import com.mycompany.myapp.service.dto.ProcessDeploymentDTO;
 import com.mycompany.myapp.service.dto.ProcessInstanceDTO;
 import com.mycompany.myapp.service.dto.TaskInstanceDTO;
+import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -23,9 +26,9 @@ import tech.jhipster.web.util.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class ProcessDefinitionResource {
+public class ProcessDefinitionController {
 
-    private final Logger log = LoggerFactory.getLogger(ProcessDefinitionResource.class);
+    private final Logger log = LoggerFactory.getLogger(ProcessDefinitionController.class);
 
     private static final String ENTITY_NAME = "processDefinition";
 
@@ -40,10 +43,11 @@ public class ProcessDefinitionResource {
 
     private final TaskInstanceService taskInstanceService;
 
-    public ProcessDefinitionResource(
-            ProcessDefinitionService processDefinitionService,
-            ProcessDeploymentService processDeploymentService, ProcessInstanceService processInstanceService,
-            TaskInstanceService taskInstanceService
+    public ProcessDefinitionController(
+        ProcessDefinitionService processDefinitionService,
+        ProcessDeploymentService processDeploymentService,
+        ProcessInstanceService processInstanceService,
+        TaskInstanceService taskInstanceService
     ) {
         this.processDefinitionService = processDefinitionService;
         this.processDeploymentService = processDeploymentService;
@@ -71,20 +75,10 @@ public class ProcessDefinitionResource {
     @GetMapping("/process-definitions/{idOrBpmnProcessDefinitionId}")
     public ResponseEntity<ProcessDefinitionDTO> getProcessDefinition(@PathVariable String idOrBpmnProcessDefinitionId) {
         log.debug("REST request to get ProcessDefinition : {}", idOrBpmnProcessDefinitionId);
-        Optional<ProcessDefinitionDTO> processDefinitionDTO = processDefinitionService.findByIdOrBpmnProcessDefinitionId(idOrBpmnProcessDefinitionId);
+        Optional<ProcessDefinitionDTO> processDefinitionDTO = processDefinitionService.findByIdOrBpmnProcessDefinitionId(
+            idOrBpmnProcessDefinitionId
+        );
         return ResponseUtil.wrapOrNotFound(processDefinitionDTO);
-    }
-
-    /**
-     * {@code GET  /process-definitions/:idOrBpmnProcessDefinitionId/tenants} : get the "idOrBpmnProcessDefinitionId" processDefinition.
-     *
-     * @param idOrBpmnProcessDefinitionId the id of the processDefinitionDTO associated with Tenants.
-     * @return the list of tenantsDTO, or with status {@code 404 (Not Found)}.
-     */
-    @GetMapping("/process-definitions/{idOrBpmnProcessDefinitionId}/active-deployments")
-    public List<ProcessDeploymentDTO> getActiveProcessDeployments(@PathVariable String idOrBpmnProcessDefinitionId) {
-        log.debug("REST request to get Tenants of the ProcessDefinition : {}", idOrBpmnProcessDefinitionId);
-        return processDeploymentService.findActiveByProcessDefinition(idOrBpmnProcessDefinitionId);
     }
 
     /**
@@ -134,8 +128,8 @@ public class ProcessDefinitionResource {
         log.debug("REST request to delete ProcessDefinition : {}", id);
         processDefinitionService.delete(id);
         return ResponseEntity
-                .noContent()
-                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-                .build();
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }

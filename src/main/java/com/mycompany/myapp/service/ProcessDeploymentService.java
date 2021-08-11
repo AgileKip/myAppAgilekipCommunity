@@ -8,6 +8,12 @@ import com.mycompany.myapp.service.dto.ProcessDefinitionDTO;
 import com.mycompany.myapp.service.dto.ProcessDeploymentBpmnModelDTO;
 import com.mycompany.myapp.service.dto.ProcessDeploymentDTO;
 import com.mycompany.myapp.service.mapper.ProcessDeploymentMapper;
+import java.io.ByteArrayInputStream;
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import org.camunda.bpm.engine.RepositoryService;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
@@ -22,13 +28,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.io.ByteArrayInputStream;
-import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link ProcessDeployment}.
@@ -47,7 +46,12 @@ public class ProcessDeploymentService {
 
     private final ProcessDeploymentMapper processDeploymentMapper;
 
-    public ProcessDeploymentService(ProcessDefinitionService processDefinitionService, ProcessDeploymentRepository processDeploymentRepository, RepositoryService repositoryService, ProcessDeploymentMapper processDeploymentMapper) {
+    public ProcessDeploymentService(
+        ProcessDefinitionService processDefinitionService,
+        ProcessDeploymentRepository processDeploymentRepository,
+        RepositoryService repositoryService,
+        ProcessDeploymentMapper processDeploymentMapper
+    ) {
         this.processDefinitionService = processDefinitionService;
         this.processDeploymentRepository = processDeploymentRepository;
         this.repositoryService = repositoryService;
@@ -55,15 +59,17 @@ public class ProcessDeploymentService {
     }
 
     public ProcessDeploymentDTO deploy(ProcessDeploymentDTO processDeploymentDTO) {
-        BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromStream(new ByteArrayInputStream(processDeploymentDTO.getSpecificationFile()));
+        BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromStream(
+            new ByteArrayInputStream(processDeploymentDTO.getSpecificationFile())
+        );
         ProcessDefinition processDefinition = processDefinitionService.createOrUpdateProcessDefinition(bpmnModelInstance);
 
         org.camunda.bpm.engine.repository.Deployment camundaDeployment = deployInCamunda(processDefinition, bpmnModelInstance);
 
         org.camunda.bpm.engine.repository.ProcessDefinition camundaProcessDefinition = repositoryService
-                .createProcessDefinitionQuery()
-                .deploymentId(camundaDeployment.getId())
-                .singleResult();
+            .createProcessDefinitionQuery()
+            .deploymentId(camundaDeployment.getId())
+            .singleResult();
 
         ProcessDeployment processDeployment = processDeploymentMapper.toEntity(processDeploymentDTO);
         processDeployment.setProcessDefinition(processDefinition);
@@ -86,7 +92,6 @@ public class ProcessDeploymentService {
         return processDeploymentRepository.findById(id).map(processDeploymentMapper::toBpmnModelDto);
     }
 
-
     public void activate(Long processDeploymentId) {
         ProcessDeployment processDeployment = processDeploymentRepository.findById(processDeploymentId).orElseThrow();
         inactivatePreviousProcessDeployments(processDeployment);
@@ -100,24 +105,31 @@ public class ProcessDeploymentService {
     }
 
     public List<ProcessDeploymentDTO> findByProcessDefinition(String idOrBpmnProcessDefinitionId) {
-        ProcessDefinitionDTO processDefinitionDTO = processDefinitionService.findByIdOrBpmnProcessDefinitionId(idOrBpmnProcessDefinitionId).orElseThrow();
+        ProcessDefinitionDTO processDefinitionDTO = processDefinitionService
+            .findByIdOrBpmnProcessDefinitionId(idOrBpmnProcessDefinitionId)
+            .orElseThrow();
         return processDeploymentRepository
-                .findByProcessDefinitionId(processDefinitionDTO.getId())
-                .stream()
-                .map(processDeploymentMapper::toDto)
-                .collect(Collectors.toList());
+            .findByProcessDefinitionId(processDefinitionDTO.getId())
+            .stream()
+            .map(processDeploymentMapper::toDto)
+            .collect(Collectors.toList());
     }
 
     public List<ProcessDeploymentDTO> findActiveByProcessDefinition(String idOrBpmnProcessDefinitionId) {
-        ProcessDefinitionDTO processDefinitionDTO = processDefinitionService.findByIdOrBpmnProcessDefinitionId(idOrBpmnProcessDefinitionId).orElseThrow();
+        ProcessDefinitionDTO processDefinitionDTO = processDefinitionService
+            .findByIdOrBpmnProcessDefinitionId(idOrBpmnProcessDefinitionId)
+            .orElseThrow();
         return processDeploymentRepository
-                .findByProcessDefinitionIdAndStatusIsActive(processDefinitionDTO.getId())
-                .stream()
-                .map(processDeploymentMapper::toDto)
-                .collect(Collectors.toList());
+            .findByProcessDefinitionIdAndStatusIsActive(processDefinitionDTO.getId())
+            .stream()
+            .map(processDeploymentMapper::toDto)
+            .collect(Collectors.toList());
     }
 
-    private org.camunda.bpm.engine.repository.Deployment deployInCamunda(ProcessDefinition processDefinition, BpmnModelInstance bpmnModelInstance) {
+    private org.camunda.bpm.engine.repository.Deployment deployInCamunda(
+        ProcessDefinition processDefinition,
+        BpmnModelInstance bpmnModelInstance
+    ) {
         configureListeners(bpmnModelInstance);
         return repositoryService
             .createDeployment()
@@ -127,10 +139,12 @@ public class ProcessDeploymentService {
     }
 
     private void inactivatePreviousProcessDeployments(ProcessDeployment processDeployment) {
-        Optional<ProcessDeployment> previousProcessDeployment = processDeploymentRepository.findByProcessDefinitionIdAndStatusIsActive(processDeployment.getProcessDefinition().getId());
+        Optional<ProcessDeployment> previousProcessDeployment = processDeploymentRepository.findByProcessDefinitionIdAndStatusIsActive(
+            processDeployment.getProcessDefinition().getId()
+        );
         if (previousProcessDeployment.isPresent()) {
             inactivate(previousProcessDeployment.get().getId());
-        };
+        }
     }
 
     private void configureListeners(BpmnModelInstance modelInstance) {
@@ -206,6 +220,4 @@ public class ProcessDeploymentService {
                 }
             );
     }
-
-
 }

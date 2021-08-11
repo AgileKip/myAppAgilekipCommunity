@@ -19,15 +19,15 @@ export default class ProcessInstanceService {
   }
 
   public findBpmnModel(id: number): Promise<any> {
-    return new Promise<IProcessInstance>((resolve, reject) => {
+    return new Promise<any>((resolve, reject) => {
       axios
-          .get(`${baseApiUrl}/${id}/bpmnModel`)
-          .then(res => {
-            resolve(res.data);
-          })
-          .catch(err => {
-            reject(err);
-          });
+        .get(`${baseApiUrl}/${id}/bpmnModel`)
+        .then(res => {
+          resolve(res.data);
+        })
+        .catch(err => {
+          reject(err);
+        });
     });
   }
 

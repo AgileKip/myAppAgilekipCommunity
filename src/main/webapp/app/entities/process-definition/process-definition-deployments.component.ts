@@ -1,11 +1,10 @@
-import {Component, Inject, Vue} from 'vue-property-decorator';
+import { Component, Inject, Vue } from 'vue-property-decorator';
 
-import {IProcessDefinition} from '@/shared/model/process-definition.model';
-import {IProcessDeployment} from "@/shared/model/process-deployment.model";
+import { IProcessDefinition } from '@/shared/model/process-definition.model';
+import { IProcessDeployment } from '@/shared/model/process-deployment.model';
 
 import ProcessDefinitionService from '@/entities/process-definition/process-definition.service';
-import {StatusProcessDeployment} from "@/shared/model/enumerations/status-process-deployment.model";
-
+import { StatusProcessDeployment } from '@/shared/model/enumerations/status-process-deployment.model';
 
 @Component
 export default class ProcessDefinitionDeployments extends Vue {
@@ -20,7 +19,7 @@ export default class ProcessDefinitionDeployments extends Vue {
 
   public collapseController: any = { showActiveDeployments: true, showInactiveDeployments: false };
 
-  public collapse(collapseComponent:string):void {
+  public collapse(collapseComponent: string): void {
     this.collapseController[collapseComponent] = !this.collapseController[collapseComponent];
   }
 
@@ -80,12 +79,11 @@ export default class ProcessDefinitionDeployments extends Vue {
     this.$router.go(-1);
   }
 
-  get activeProcessDeployments():IProcessDeployment[] {
+  get activeProcessDeployments(): IProcessDeployment[] {
     return this.processDeployments.filter(processDeployment => processDeployment.status == StatusProcessDeployment.ACTIVE);
   }
 
-  get inactiveProcessDeployments():IProcessDeployment[] {
+  get inactiveProcessDeployments(): IProcessDeployment[] {
     return this.processDeployments.filter(processDeployment => processDeployment.status == StatusProcessDeployment.INACTIVE);
   }
-
 }

@@ -3,17 +3,15 @@ package com.mycompany.myapp.service.mapper;
 import com.mycompany.myapp.domain.ProcessDeployment;
 import com.mycompany.myapp.service.dto.ProcessDeploymentBpmnModelDTO;
 import com.mycompany.myapp.service.dto.ProcessDeploymentDTO;
+import java.nio.charset.StandardCharsets;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-
-import java.nio.charset.StandardCharsets;
 
 /**
  * Mapper for the entity {@link ProcessDeployment} and its DTO {@link ProcessDeploymentDTO}.
  */
 @Mapper(componentModel = "spring", uses = {})
 public interface ProcessDeploymentMapper extends EntityMapper<ProcessDeploymentDTO, ProcessDeployment> {
-
     @Mapping(target = "specificationFile", ignore = true)
     @Mapping(target = "specificationFileContentType", ignore = true)
     ProcessDeploymentDTO toDto(ProcessDeployment processDeployment);
@@ -26,5 +24,4 @@ public interface ProcessDeploymentMapper extends EntityMapper<ProcessDeploymentD
     default String byteArrayToString(byte[] bytes) {
         return new String(bytes, StandardCharsets.UTF_8);
     }
-
 }

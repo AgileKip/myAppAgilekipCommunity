@@ -11,9 +11,7 @@
         </h2>
         <div class="form-group row py-5">
           <div class="col-sm">
-            <label
-              class="form-control-label"
-              v-text="$t('myAppAgilekipCommunityApp.processDefinition.specificationFile')"
+            <label class="form-control-label" v-text="$t('myAppAgilekipCommunityApp.processDefinition.specificationFile')"
               >Specification File</label
             >
             <div>
@@ -77,7 +75,7 @@
             :disabled="$v.processDeployment.$invalid || isDeploying"
             class="btn btn-primary"
           >
-            <font-awesome-icon icon="save"></font-awesome-icon>&nbsp;<span v-text="$t('entity.action.deploy')">Deploy</span>
+            <font-awesome-icon icon="save"></font-awesome-icon>&nbsp;Deploy
           </button>
         </div>
       </form>

@@ -5,40 +5,39 @@ import ProcessInstanceService from '@/entities/process-instance/process-instance
 
 @Component
 export default class AkipShowProcessInstanceBpmnModelComponent extends Vue {
-    @Inject('processInstanceService') private processInstanceService: () => ProcessInstanceService;
+  @Inject('processInstanceService') private processInstanceService: () => ProcessInstanceService;
 
-    @Prop()
-    processInstanceId: number;
+  @Prop()
+  processInstanceId: number;
 
-    mounted() {
-        this.tryRenderBpmnModel();
-        this.$watch('processInstanceId', this.tryRenderBpmnModel);
+  mounted() {
+    this.tryRenderBpmnModel();
+    this.$watch('processInstanceId', this.tryRenderBpmnModel);
+  }
+
+  public tryRenderBpmnModel() {
+    if (this.processInstanceId == undefined) {
+      return;
     }
 
-    public tryRenderBpmnModel() {
-        if (this.processInstanceId == undefined) {
-            return;
+    this.processInstanceService()
+      .findBpmnModel(this.processInstanceId)
+      .then(
+        res => {
+          var viewer = new Viewer({ container: '#canvas' });
+          viewer.importXML(res.processDeploymentBpmnModel.specificationFile).then(() => {
+            var canvas = viewer.get('canvas');
+            res.completedTasksDefinitionKeys.forEach(taskDefinitionKey => {
+              canvas.addMarker(taskDefinitionKey, 'akip-completed-task');
+            });
+            res.runningTasksDefinitionKeys.forEach(taskDefinitionKey => {
+              canvas.addMarker(taskDefinitionKey, 'akip-doing-task');
+            });
+          });
+        },
+        err => {
+          console.error('Problem rendering bpmn ', err.response);
         }
-
-        this.processInstanceService()
-            .findBpmnModel(this.processInstanceId)
-            .then(
-                res => {
-                    var viewer = new Viewer({ container: '#canvas' });
-                    viewer.importXML(res.processDeploymentBpmnModel.specificationFile).then(
-                        () => {
-                            var canvas = viewer.get('canvas');
-                            res.completedTasksDefinitionKeys.forEach(taskDefinitionKey => {
-                                canvas.addMarker(taskDefinitionKey, 'akip-completed-task');
-                            });
-                            res.runningTasksDefinitionKeys.forEach(taskDefinitionKey => {
-                                canvas.addMarker(taskDefinitionKey, 'akip-doing-task');
-                            });
-                        });
-                },
-                err => {
-                    console.error('Problem rendering bpmn ', err.response);
-                }
-            );
-    }
+      );
+  }
 }

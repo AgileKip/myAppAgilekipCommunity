@@ -9,7 +9,7 @@
     <!--
         Added the entity ProcessDeployment.
     -->
-    <changeSet id="00000000000002" author="jhipster">
+    <changeSet id="00000000000002" author="akip">
         <createTable tableName="process_deployment">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>

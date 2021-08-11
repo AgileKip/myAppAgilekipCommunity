@@ -17,50 +17,50 @@
             <div class="form-group row">
               <div class="col-sm">
                 <span class="label" v-text="$t('myAppAgilekipCommunityApp.processInstance.processDefinition')">Process Definition </span>:
-                <br/>
+                <br />
                 <span class="link" v-if="processDeployment.processDefinition">
-                  <router-link
-                    class="link"
-                    :to="`/process-definition/${processDeployment.processDefinition.bpmnProcessDefinitionId}/view`"
-                  >
+                  <router-link class="link" :to="`/process-definition/${processDeployment.processDefinition.bpmnProcessDefinitionId}/view`">
                     {{ processDeployment.processDefinition.name }}
                   </router-link>
                 </span>
               </div>
 
               <div class="col-sm">
-                <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDeployment.camundaProcessDefinitionId')">Process Definition </span>:
-                <br/>
+                <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDeployment.camundaProcessDefinitionId')"
+                  >Process Definition </span
+                >:
+                <br />
                 <strong>{{ processDeployment.camundaProcessDefinitionId }}</strong>
               </div>
 
               <div class="col-sm">
-                <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDeployment.camundaDeploymentId')">Process Definition </span>:
-                <br/>
+                <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDeployment.camundaDeploymentId')">Process Definition </span
+                >:
+                <br />
                 <strong>{{ processDeployment.camundaDeploymentId }}</strong>
               </div>
 
               <div class="col-sm">
                 <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDeployment.tenant')">Tenant </span>:
-                <br/>
+                <br />
                 <strong v-if="processDeployment.tenant">{{ processDeployment.tenant.name }}</strong>
               </div>
             </div>
             <div class="form-group row">
               <div class="col-sm-3">
                 <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDeployment.deployDate')">Deploy Date</span>:
-                <br/>
+                <br />
                 <strong>{{ processDeployment.deployDate ? $d(Date.parse(processDeployment.deployDate), 'short') : '' }}</strong>
               </div>
 
               <div class="col-sm-3" v-if="isActive">
                 <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDeployment.activationDate')">Activation Date</span>:
-                <br/>
+                <br />
                 <strong>{{ processDeployment.activationDate ? $d(Date.parse(processDeployment.activationDate), 'short') : '' }}</strong>
               </div>
               <div class="col-sm-3" v-else>
                 <span class="label" v-text="$t('myAppAgilekipCommunityApp.processDeployment.inactivationDate')">Inactivation Date</span>:
-                <br/>
+                <br />
                 <strong>{{ processDeployment.inactivationDate ? $d(Date.parse(processDeployment.inactivationDate), 'short') : '' }}</strong>
               </div>
             </div>
@@ -71,7 +71,9 @@
                 <font-awesome-icon icon="expand-alt" v-else></font-awesome-icon>
               </h4>
               <b-collapse v-model="collapseController.showProcess" id="collapse-inactive-deployments">
-                <akip-show-process-deployment-bpmn-model :processDeploymentId="processDeployment.id"></akip-show-process-deployment-bpmn-model>
+                <akip-show-process-deployment-bpmn-model
+                  :processDeploymentId="processDeployment.id"
+                ></akip-show-process-deployment-bpmn-model>
               </b-collapse>
             </div>
           </div>
@@ -87,10 +89,8 @@
 <script lang="ts" src="./process-deployment-details.component.ts"></script>
 
 <style scoped>
-
 .title {
   float: left;
   padding-right: 0.55em;
 }
-
 </style>

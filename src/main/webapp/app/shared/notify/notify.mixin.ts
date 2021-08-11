@@ -14,7 +14,7 @@ export default class NotifyMixin extends Vue {
   }
 
   public notifySuccessFromResponse(response: any) {
-    this.notifyFromResponse(response, 'Sucesso', 'success');
+    this.notifyFromResponse(response, 'Success', 'success');
   }
 
   public notifyErrorFromResponse(response: any) {

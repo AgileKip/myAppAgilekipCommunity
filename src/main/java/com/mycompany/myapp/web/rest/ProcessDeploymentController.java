@@ -3,6 +3,8 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.service.ProcessDeploymentService;
 import com.mycompany.myapp.service.dto.ProcessDeploymentBpmnModelDTO;
 import com.mycompany.myapp.service.dto.ProcessDeploymentDTO;
+import java.net.URISyntaxException;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,9 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
-
-import java.net.URISyntaxException;
-import java.util.Optional;
 
 /**
  * REST controller for managing {@link com.mycompany.myapp.domain.ProcessDeployment}.
@@ -42,14 +41,13 @@ public class ProcessDeploymentController {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/process-deployment/deploy")
-    public ResponseEntity<Void> deploy(@RequestBody ProcessDeploymentDTO processDeploymentDTO)
-        throws URISyntaxException {
+    public ResponseEntity<Void> deploy(@RequestBody ProcessDeploymentDTO processDeploymentDTO) throws URISyntaxException {
         log.debug("REST request to deploy ProcessDeployment : {}", processDeploymentDTO);
         ProcessDeploymentDTO result = processDeploymentService.deploy(processDeploymentDTO);
         return ResponseEntity
-                .noContent()
-                .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getCamundaProcessDefinitionId()))
-                .build();
+            .noContent()
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getCamundaProcessDefinitionId()))
+            .build();
     }
 
     /**
@@ -89,9 +87,9 @@ public class ProcessDeploymentController {
         log.debug("REST request to inactive ProcessDeployment : {}", id);
         processDeploymentService.activate(id);
         return ResponseEntity
-                .noContent()
-                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, id.toString()))
-                .build();
+            .noContent()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 
     /**

@@ -8,6 +8,7 @@
       "entities": {
         "main": "Entities",
         "processDefinition": "Process Defitinions",
+        "processDeployment": "Process Deployments",
         "processInstance": "Process Instances",
         "taskInstance": "All Tasks",
         "myCandidateTasks": "My Tasks",
@@ -98,7 +99,6 @@
       "back": "Back",
       "cancel": "Cancel",
       "delete": "Delete",
-      "deploy": "Deploy",
       "edit": "Edit",
       "open": "Open",
       "save": "Save",

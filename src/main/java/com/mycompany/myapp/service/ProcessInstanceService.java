@@ -15,7 +15,11 @@ import com.mycompany.myapp.service.dto.ProcessInstanceDTO;
 import com.mycompany.myapp.service.dto.TaskInstanceDTO;
 import com.mycompany.myapp.service.mapper.ProcessInstanceMapper;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.camunda.bpm.engine.RuntimeService;
 import org.slf4j.Logger;
@@ -32,10 +36,6 @@ public class ProcessInstanceService {
 
     private final Logger log = LoggerFactory.getLogger(ProcessInstanceService.class);
 
-    private final ProcessInstanceRepository processInstanceRepository;
-
-    private final ProcessInstanceMapper processInstanceMapper;
-
     private final ProcessDefinitionService processDefinitionService;
 
     private final ProcessDeploymentService processDeploymentService;
@@ -46,29 +46,41 @@ public class ProcessInstanceService {
 
     private final ProcessDeploymentRepository processDeploymentRepository;
 
+    private final ProcessInstanceRepository processInstanceRepository;
+
+    private final ProcessInstanceMapper processInstanceMapper;
+
     private final RuntimeService runtimeService;
 
     public ProcessInstanceService(
-            ProcessInstanceRepository processInstanceRepository,
-            ProcessInstanceMapper processInstanceMapper,
-            ProcessDefinitionService processDefinitionService,
-            ProcessDeploymentService processDeploymentService, TaskInstanceService taskInstanceService, ProcessDefinitionRepository processDefinitionRepository,
-            ProcessDeploymentRepository processDeploymentRepository,
-            RuntimeService runtimeService) {
-        this.processInstanceRepository = processInstanceRepository;
-        this.processInstanceMapper = processInstanceMapper;
+        ProcessDefinitionService processDefinitionService,
+        ProcessDeploymentService processDeploymentService,
+        TaskInstanceService taskInstanceService,
+        ProcessDefinitionRepository processDefinitionRepository,
+        ProcessDeploymentRepository processDeploymentRepository,
+        ProcessInstanceRepository processInstanceRepository,
+        ProcessInstanceMapper processInstanceMapper,
+        RuntimeService runtimeService
+    ) {
         this.processDefinitionService = processDefinitionService;
         this.processDeploymentService = processDeploymentService;
         this.taskInstanceService = taskInstanceService;
         this.processDefinitionRepository = processDefinitionRepository;
         this.processDeploymentRepository = processDeploymentRepository;
+        this.processInstanceRepository = processInstanceRepository;
+        this.processInstanceMapper = processInstanceMapper;
         this.runtimeService = runtimeService;
     }
 
     public ProcessInstanceDTO create(ProcessInstanceDTO processInstanceDTO) {
         log.debug("Request to create processInstance : {}", processInstanceDTO);
-        ProcessDefinition processDefinition = processDefinitionRepository.findById(processInstanceDTO.getProcessDefinition().getId()).orElseThrow();
-        ProcessDeployment processDeployment = processDeploymentRepository.findByProcessDefinitionIdAndStatusIsActive(processDefinition.getId()).orElseThrow();
+
+        ProcessDefinition processDefinition = processDefinitionRepository
+            .findById(processInstanceDTO.getProcessDefinition().getId())
+            .orElseThrow();
+        ProcessDeployment processDeployment = processDeploymentRepository
+            .findByProcessDefinitionIdAndStatusIsActive(processDefinition.getId())
+            .orElseThrow();
 
         ProcessInstance processInstance = processInstanceMapper.toEntity(processInstanceDTO);
         processInstance.setProcessDefinition(processDefinition);
@@ -78,9 +90,9 @@ public class ProcessInstanceService {
         processInstance.setStatus(StatusProcessInstance.RUNNING);
 
         org.camunda.bpm.engine.runtime.ProcessInstance camundaProcessInstance = runtimeService
-                .createProcessInstanceById(processDeployment.getCamundaProcessDefinitionId())
-                .businessKey(processInstance.getBusinessKey())
-                .execute();
+            .createProcessInstanceById(processDeployment.getCamundaProcessDefinitionId())
+            .businessKey(processInstance.getBusinessKey())
+            .execute();
 
         processInstance.setCamundaProcessInstanceId(camundaProcessInstance.getProcessInstanceId());
         return processInstanceMapper.toDto(processInstanceRepository.save(processInstance));
@@ -89,12 +101,16 @@ public class ProcessInstanceService {
     public ProcessInstance create(String bpmnProcessDefinitionId, String businessKey, Object processEntity) {
         log.debug("Request to create a processInstance by bpmnProcessDefinitionId: {}", bpmnProcessDefinitionId);
 
-        ProcessDefinition processDefinition = processDefinitionRepository.findByBpmnProcessDefinitionId(bpmnProcessDefinitionId).orElseThrow();
-        ProcessDeployment processDeployment = processDeploymentRepository.findByProcessDefinitionIdAndStatusIsActive(processDefinition.getId()).orElseThrow();
+        ProcessDefinition processDefinition = processDefinitionRepository
+            .findByBpmnProcessDefinitionId(bpmnProcessDefinitionId)
+            .orElseThrow();
+        ProcessDeployment processDeployment = processDeploymentRepository
+            .findByProcessDefinitionIdAndStatusIsActive(processDefinition.getId())
+            .orElseThrow();
 
         ProcessInstance processInstance = new ProcessInstance();
-        processInstance.setProcessDefinition(processDefinition);
         processInstance.setBusinessKey(businessKey);
+        processInstance.setProcessDefinition(processDefinition);
         processInstance.setCamundaProcessDefinitionId(processDeployment.getCamundaProcessDefinitionId());
         processInstance.setCamundaDeploymentId(processDeployment.getCamundaDeploymentId());
         processInstance.setStartDate(LocalDateTime.now());
@@ -105,15 +121,14 @@ public class ProcessInstanceService {
         params.put(CamundaConstants.PROCESS_INSTANCE_INITIALS, processEntity);
 
         org.camunda.bpm.engine.runtime.ProcessInstance camundaProcessInstance = runtimeService
-                .createProcessInstanceById(processDeployment.getCamundaProcessDefinitionId())
-                .businessKey(businessKey)
-                .setVariables(params)
-                .execute();
+            .createProcessInstanceById(processDeployment.getCamundaProcessDefinitionId())
+            .businessKey(businessKey)
+            .setVariables(params)
+            .execute();
 
         processInstance.setCamundaProcessInstanceId(camundaProcessInstance.getProcessInstanceId());
         return processInstanceRepository.save(processInstance);
     }
-
 
     /**
      * Get all the processInstances.
@@ -124,10 +139,10 @@ public class ProcessInstanceService {
     public List<ProcessInstanceDTO> findAll() {
         log.debug("Request to get all ProcessInstances");
         return processInstanceRepository
-                .findAll()
-                .stream()
-                .map(processInstanceMapper::toDto)
-                .collect(Collectors.toCollection(LinkedList::new));
+            .findAll()
+            .stream()
+            .map(processInstanceMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**
@@ -146,31 +161,43 @@ public class ProcessInstanceService {
         ProcessInstanceDTO processInstance = findOne(id).orElseThrow();
         ProcessInstanceBpmnModelDTO processInstanceBpmnModel = new ProcessInstanceBpmnModelDTO();
 
-        ProcessDeployment processDeployment = processDeploymentRepository.findByCamundaProcessDefinitionId(processInstance.getCamundaProcessDefinitionId()).orElseThrow();
+        ProcessDeployment processDeployment = processDeploymentRepository
+            .findByCamundaProcessDefinitionId(processInstance.getCamundaProcessDefinitionId())
+            .orElseThrow();
         processInstanceBpmnModel.setProcessDeploymentBpmnModel(processDeploymentService.findBpmnModel(processDeployment.getId()).get());
 
         List<TaskInstanceDTO> processInstanceTasks = taskInstanceService.findByProcessInstance(id);
 
-        processInstanceBpmnModel.setRunningTasksDefinitionKeys(processInstanceTasks.stream()
-                .filter(taskInstanceDTO -> taskInstanceDTO.getStatus() == StatusTaskInstance.NEW || taskInstanceDTO.getStatus() == StatusTaskInstance.ASSIGNED)
+        processInstanceBpmnModel.setRunningTasksDefinitionKeys(
+            processInstanceTasks
+                .stream()
+                .filter(
+                    taskInstanceDTO ->
+                        taskInstanceDTO.getStatus() == StatusTaskInstance.NEW || taskInstanceDTO.getStatus() == StatusTaskInstance.ASSIGNED
+                )
                 .map(TaskInstanceDTO::getTaskDefinitionKey)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())
+        );
 
-        processInstanceBpmnModel.setCompletedTasksDefinitionKeys(processInstanceTasks.stream()
+        processInstanceBpmnModel.setCompletedTasksDefinitionKeys(
+            processInstanceTasks
+                .stream()
                 .filter(taskInstanceDTO -> taskInstanceDTO.getStatus() == StatusTaskInstance.COMPLETED)
                 .map(TaskInstanceDTO::getTaskDefinitionKey)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())
+        );
 
         return Optional.of(processInstanceBpmnModel);
     }
 
     public List<ProcessInstanceDTO> findByProcessDefinition(String idOrBpmnProcessDefinitionId) {
-        ProcessDefinitionDTO processDefinitionDTO = processDefinitionService.findByIdOrBpmnProcessDefinitionId(idOrBpmnProcessDefinitionId).orElseThrow();
+        ProcessDefinitionDTO processDefinitionDTO = processDefinitionService
+            .findByIdOrBpmnProcessDefinitionId(idOrBpmnProcessDefinitionId)
+            .orElseThrow();
         return processInstanceRepository
-                .findByProcessDefinitionId(processDefinitionDTO.getId())
-                .stream()
-                .map(processInstanceMapper::toDto)
-                .collect(Collectors.toList());
+            .findByProcessDefinitionId(processDefinitionDTO.getId())
+            .stream()
+            .map(processInstanceMapper::toDto)
+            .collect(Collectors.toList());
     }
-
 }

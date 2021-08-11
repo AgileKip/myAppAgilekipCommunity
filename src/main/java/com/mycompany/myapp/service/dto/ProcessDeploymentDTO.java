@@ -1,7 +1,6 @@
 package com.mycompany.myapp.service.dto;
 
 import com.mycompany.myapp.domain.enumeration.StatusProcessDeployment;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;

@@ -1,13 +1,12 @@
 package com.mycompany.myapp.domain;
 
 import com.mycompany.myapp.domain.enumeration.StatusProcessDeployment;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * A ProcessDeployment.

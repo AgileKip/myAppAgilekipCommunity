@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h2 id="page-heading" data-cy="ProcessInstanceHeading">
-      #{{ processDefinition.id }} - {{ processDefinition.name }} -
-      <span>Instances</span>
-      <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-between">
+      <h2 id="page-heading" data-cy="ProcessInstanceHeading">
+        <span>#{{ processDefinition.id }} - {{ processDefinition.name }} - Instances</span>
+      </h2>
+      <div>
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
           <span v-text="$t('myAppAgilekipCommunityApp.processInstance.home.refreshListLabel')">Refresh List</span>
         </button>
-
         <router-link
           :to="`/process-definition/${processDefinition.bpmnProcessDefinitionId}/init`"
           tag="button"
@@ -18,7 +18,7 @@
           <span class="d-none d-md-inline">Init</span>
         </router-link>
       </div>
-    </h2>
+    </div>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && processInstances && processInstances.length === 0">
       <span v-text="$t('myAppAgilekipCommunityApp.processInstance.home.notFound')">No processInstances found</span>
@@ -32,7 +32,9 @@
             <th scope="row"><span v-text="$t('myAppAgilekipCommunityApp.processInstance.status')">Status</span></th>
             <th scope="row"><span v-text="$t('myAppAgilekipCommunityApp.processInstance.startDate')">Start Date</span></th>
             <th scope="row"><span v-text="$t('myAppAgilekipCommunityApp.processInstance.endDate')">End Date</span></th>
-            <th scope="row"><span v-text="$t('myAppAgilekipCommunityApp.processInstance.camundaDeploymentId')">Camunda Deployment Id</span></th>
+            <th scope="row">
+              <span v-text="$t('myAppAgilekipCommunityApp.processInstance.camundaDeploymentId')">Camunda Deployment Id</span>
+            </th>
             <th scope="row">
               <span v-text="$t('myAppAgilekipCommunityApp.processInstance.camundaProcessDefinitionId')">Camunda Process Definition Id</span>
             </th>

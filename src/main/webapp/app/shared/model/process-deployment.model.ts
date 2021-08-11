@@ -1,6 +1,5 @@
-
-import { ProcessDefinition } from "@/shared/model/process-definition.model";
-import { StatusProcessDeployment } from "@/shared/model/enumerations/status-process-deployment.model";
+import { ProcessDefinition } from '@/shared/model/process-definition.model';
+import { StatusProcessDeployment } from '@/shared/model/enumerations/status-process-deployment.model';
 
 export interface IProcessDeployment {
   id?: number;
@@ -28,6 +27,6 @@ export class ProcessDeployment implements IProcessDeployment {
     public deployDate?: Date | null,
     public activationDate?: Date | null,
     public inactivationDate?: Date | null,
-    public processDefinition?: ProcessDefinition | null,
+    public processDefinition?: ProcessDefinition | null
   ) {}
 }

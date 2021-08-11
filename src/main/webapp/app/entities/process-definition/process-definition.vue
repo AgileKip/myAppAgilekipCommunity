@@ -1,8 +1,12 @@
 <template>
   <div>
-    <h2 id="page-heading" data-cy="ProcessDefinitionHeading">
-      <span v-text="$t('myAppAgilekipCommunityApp.processDefinition.home.title')" id="process-definition-heading">Process Definitions</span>
-      <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-between">
+      <h2 id="page-heading" data-cy="ProcessDefinitionHeading">
+        <span v-text="$t('myAppAgilekipCommunityApp.processDefinition.home.title')" id="process-definition-heading"
+          >Process Definitions</span
+        >
+      </h2>
+      <div>
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
           <span v-text="$t('myAppAgilekipCommunityApp.processDefinition.home.refreshListLabel')">Refresh List</span>
@@ -12,13 +16,13 @@
           tag="button"
           id="jh-create-entity"
           data-cy="entityCreateButton"
-          class="btn btn-primary jh-create-entity create-process-definition"
+          class="btn btn-primary jh-create-entity deploy-process"
         >
           <font-awesome-icon icon="plus"></font-awesome-icon>
-          <span v-text="$t('myAppAgilekipCommunityApp.processDefinition.deploy.title')">Deploy a Process</span>
+          <span v-text="$t('myAppAgilekipCommunityApp.processDefinition.deploy.title')"> Deploy a Process </span>
         </router-link>
       </div>
-    </h2>
+    </div>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && processDefinitions && processDefinitions.length === 0">
       <span v-text="$t('myAppAgilekipCommunityApp.processDefinition.home.notFound')">No processDefinitions found</span>
@@ -57,9 +61,9 @@
                 </router-link>
 
                 <router-link
-                    :to="`/process-definition/${processDefinition.bpmnProcessDefinitionId}/deployments`"
-                    tag="button"
-                    class="btn btn-primary btn-sm details"
+                  :to="`/process-definition/${processDefinition.bpmnProcessDefinitionId}/deployments`"
+                  tag="button"
+                  class="btn btn-primary btn-sm details"
                 >
                   <font-awesome-icon icon="list"></font-awesome-icon>
                   <span class="d-none d-md-inline">Deployments</span>
@@ -83,7 +87,7 @@
                   <font-awesome-icon icon="eye"></font-awesome-icon>
                   <span class="d-none d-md-inline" v-text="$t('entity.action.view')">View</span>
                 </router-link>
-
+                <!-- delete process definition feature temporarely removed 
                 <b-button
                   v-on:click="prepareRemove(processDefinition)"
                   variant="danger"
@@ -94,12 +98,14 @@
                   <font-awesome-icon icon="times"></font-awesome-icon>
                   <span class="d-none d-md-inline" v-text="$t('entity.action.delete')">Delete</span>
                 </b-button>
+                 -->
               </div>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+    <!-- delete process definition feature temporarely removed 
     <b-modal ref="removeEntity" id="removeEntity">
       <span slot="modal-title"
         ><span
@@ -110,7 +116,7 @@
         ></span
       >
       <div class="modal-body">
-        <p id="jhi-delete-processDefinition-heading" v-html="$t('myAppAgilekipCommunityApp.processDefinition.delete.question', { id: removeId })">
+        <p id="jhi-delete-processDefinition-heading" v-html="$t('myAppAgilekipCommunityApp.processDefinition.delete.question', { name: processDefinitionToRemove ? processDefinitionToRemove.name : '' })">
           Are you sure you want to delete this Process Definition?
         </p>
       </div>
@@ -128,7 +134,7 @@
         </button>
       </div>
     </b-modal>
-  </div>
+  --></div>
 </template>
 
 <script lang="ts" src="./process-definition.component.ts"></script>

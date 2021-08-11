@@ -99,7 +99,9 @@
                   </div>
                   <div class="row">
                     <div class="col-12">
-                      <akip-show-process-instance-bpmn-model :processInstanceId="processInstance.id"></akip-show-process-instance-bpmn-model>
+                      <akip-show-process-instance-bpmn-model
+                        :processInstanceId="processInstance.id"
+                      ></akip-show-process-instance-bpmn-model>
                     </div>
                   </div>
                 </b-collapse>

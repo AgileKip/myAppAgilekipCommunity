@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity TaskInstance.
     -->
-    <changeSet id="20210305203000-2" author="jhipster">
+    <changeSet id="00000000000007" author="akip">
 
         <addForeignKeyConstraint baseColumnNames="process_definition_id"
                                  baseTableName="task_instance"

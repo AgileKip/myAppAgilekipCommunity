@@ -1,0 +1,10 @@
+{
+  "myAppAgilekipCommunityApp": {
+    "StatusProcessDeployment": {
+      "null": "",
+      "ERROR": "ERROR",
+      "ACTIVE": "ACTIVE",
+      "INACTIVE": "INACTIVE"
+    }
+  }
+}

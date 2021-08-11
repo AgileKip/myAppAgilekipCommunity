@@ -5,10 +5,9 @@ import com.mycompany.myapp.domain.enumeration.StatusProcessDefinition;
 import com.mycompany.myapp.repository.ProcessDefinitionRepository;
 import com.mycompany.myapp.service.dto.ProcessDefinitionDTO;
 import com.mycompany.myapp.service.mapper.ProcessDefinitionMapper;
+import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import org.apache.commons.lang3.StringUtils;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.Process;
@@ -33,7 +32,10 @@ public class ProcessDefinitionService {
 
     private final ProcessDefinitionMapper processDefinitionMapper;
 
-    public ProcessDefinitionService(ProcessDefinitionRepository processDefinitionRepository, ProcessDefinitionMapper processDefinitionMapper) {
+    public ProcessDefinitionService(
+        ProcessDefinitionRepository processDefinitionRepository,
+        ProcessDefinitionMapper processDefinitionMapper
+    ) {
         this.processDefinitionRepository = processDefinitionRepository;
         this.processDefinitionMapper = processDefinitionMapper;
     }
@@ -54,11 +56,19 @@ public class ProcessDefinitionService {
         Process process = (Process) modelInstance.getModelElementsByType(processType).iterator().next();
 
         if (!process.isExecutable()) {
-            throw new BadRequestAlertException("Model is not executable", ENTITY_NAME, "myAppAgilekipCommunityApp.processDefinition.error.bpmnProcessIsNotExecutable");
+            throw new BadRequestAlertException(
+                "Model is not executable",
+                ENTITY_NAME,
+                "myAppAgilekipCommunityApp.processDefinition.error.bpmnProcessIsNotExecutable"
+            );
         }
 
         if (StringUtils.isBlank(process.getName())) {
-            throw new BadRequestAlertException("Process name is not provided", ENTITY_NAME, "myAppAgilekipCommunityApp.processDefinition.error.bpmnNameNotProvided");
+            throw new BadRequestAlertException(
+                "Process name is not provided",
+                ENTITY_NAME,
+                "myAppAgilekipCommunityApp.processDefinition.error.bpmnNameNotProvided"
+            );
         }
 
         return process;
@@ -98,10 +108,10 @@ public class ProcessDefinitionService {
     public List<ProcessDefinitionDTO> findAll() {
         log.debug("Request to get all ProcessDefinitions");
         return processDefinitionRepository
-                .findAll()
-                .stream()
-                .map(processDefinitionMapper::toDto)
-                .collect(Collectors.toCollection(LinkedList::new));
+            .findAll()
+            .stream()
+            .map(processDefinitionMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**

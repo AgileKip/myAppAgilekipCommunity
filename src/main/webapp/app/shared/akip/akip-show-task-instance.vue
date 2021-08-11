@@ -8,7 +8,7 @@
       <akip-show-task-instance-status :status="taskInstance.status"></akip-show-task-instance-status>
     </h5>
     <div class="card-body">
-      <div class="xcontainer">
+      <div>
         <div class="row px-3">
           <div class="col-9 description">
             <div v-if="taskInstance.description">

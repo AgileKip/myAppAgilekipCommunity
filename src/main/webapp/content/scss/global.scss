@@ -259,6 +259,10 @@ ui bootstrap tweaks
   white-space: nowrap;
 }
 
+.akip-completed-task:not(.djs-connection) .djs-visual > :nth-child(1) {
+  fill: #cccccc !important;
+}
+
 .akip-doing-task:not(.djs-connection) .djs-visual > :nth-child(1) {
   fill: #00800078 !important;
 }

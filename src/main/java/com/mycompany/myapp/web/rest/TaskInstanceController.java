@@ -17,16 +17,16 @@ import tech.jhipster.web.util.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class TaskInstanceResource {
+public class TaskInstanceController {
 
-    private final Logger log = LoggerFactory.getLogger(TaskInstanceResource.class);
+    private final Logger log = LoggerFactory.getLogger(TaskInstanceController.class);
 
     private final TaskInstanceService taskInstanceService;
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    public TaskInstanceResource(TaskInstanceService taskInstanceService) {
+    public TaskInstanceController(TaskInstanceService taskInstanceService) {
         this.taskInstanceService = taskInstanceService;
     }
 

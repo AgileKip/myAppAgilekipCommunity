@@ -7,15 +7,15 @@ const ProcessDefinition = () => import('@/entities/process-definition/process-de
 // prettier-ignore
 const ProcessDefinitionDeploy = () => import('@/entities/process-definition/process-definition-deploy.vue');
 // prettier-ignore
-const ProcessDefinitionDetails = () => import('@/entities/process-definition/process-definition-details.vue');
+const ProcessDefinitionDeployments = () => import('@/entities/process-definition/process-definition-deployments.vue');
 // prettier-ignore
-const ProcessDeploymentDetails = () => import('@/entities/process-deployment/process-deployment-details.vue');
+const ProcessDefinitionDetails = () => import('@/entities/process-definition/process-definition-details.vue');
 // prettier-ignore
 const ProcessDefinitionInit = () => import('@/entities/process-definition/process-definition-init.vue');
 // prettier-ignore
 const ProcessDefinitionInstances = () => import('@/entities/process-definition/process-definition-instances.vue');
 // prettier-ignore
-const ProcessDefinitionDeployments = () => import('@/entities/process-definition/process-definition-deployments.vue');
+const ProcessDeploymentDetails = () => import('@/entities/process-deployment/process-deployment-details.vue');
 // prettier-ignore
 const ProcessInstance = () => import('@/entities/process-instance/process-instance.vue');
 // prettier-ignore
@@ -44,6 +44,12 @@ export default [
     meta: { authorities: [Authority.USER] },
   },
   {
+    path: '/process-definition/:processDefinitionId/deployments',
+    name: 'ProcessDefinitionDeployments',
+    component: ProcessDefinitionDeployments,
+    meta: { authorities: [Authority.USER] },
+  },
+  {
     path: '/process-definition/:processDefinitionId/view',
     name: 'ProcessDefinitionView',
     component: ProcessDefinitionDetails,
@@ -56,27 +62,21 @@ export default [
     meta: { authorities: [Authority.USER] },
   },
   {
-    path: '/process-definition/:processDefinitionId/deployments',
-    name: 'ProcessDefinitionDeployments',
-    component: ProcessDefinitionDeployments,
-    meta: { authorities: [Authority.USER] },
-  },
-  {
     path: '/process-definition/:processDefinitionId/instances',
     name: 'ProcessDefinitionInstances',
     component: ProcessDefinitionInstances,
     meta: { authorities: [Authority.USER] },
   },
   {
-    path: '/process-instances',
-    name: 'ProcessInstance',
-    component: ProcessInstance,
+    path: '/process-deployment/:processDeploymentId/view',
+    name: 'ProcessDeploymentView',
+    component: ProcessDeploymentDetails,
     meta: { authorities: [Authority.USER] },
   },
   {
-    path: '/process-definition/:processDefinitionId/deployment/:processDeploymentId/view',
-    name: 'ProcessDeploymentView',
-    component: ProcessDeploymentDetails,
+    path: '/process-instances',
+    name: 'ProcessInstance',
+    component: ProcessInstance,
     meta: { authorities: [Authority.USER] },
   },
   {

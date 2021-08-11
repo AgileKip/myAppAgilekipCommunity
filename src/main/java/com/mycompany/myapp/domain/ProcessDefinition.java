@@ -58,22 +58,12 @@ public class ProcessDefinition implements Serializable {
         return this.name;
     }
 
-    public ProcessDefinition name(String name) {
-        this.name = name;
-        return this;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
     public String getDescription() {
         return this.description;
-    }
-
-    public ProcessDefinition description(String description) {
-        this.description = description;
-        return this;
     }
 
     public void setDescription(String description) {
@@ -84,22 +74,12 @@ public class ProcessDefinition implements Serializable {
         return this.status;
     }
 
-    public ProcessDefinition status(StatusProcessDefinition status) {
-        this.status = status;
-        return this;
-    }
-
     public void setStatus(StatusProcessDefinition status) {
         this.status = status;
     }
 
     public String getBpmnProcessDefinitionId() {
         return this.bpmnProcessDefinitionId;
-    }
-
-    public ProcessDefinition bpmnProcessDefinitionId(String bpmnProcessDefinitionId) {
-        this.bpmnProcessDefinitionId = bpmnProcessDefinitionId;
-        return this;
     }
 
     public void setBpmnProcessDefinitionId(String bpmnProcessDefinitionId) {
