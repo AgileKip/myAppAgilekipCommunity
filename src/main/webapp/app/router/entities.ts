@@ -44,6 +44,10 @@ const OrderBookProcessDetails = () => import('@/entities/order-book-process/orde
 const OrderBookProcessList = () => import('@/entities/order-book-process/order-book-process-list.vue');
 // prettier-ignore
 const OrderBookProcessStartFormInit = () => import('@/entities/order-book-process/order-book-process-start-form-init.vue');
+// prettier-ignore
+const OrderBookProcess_TaskAddBookDetails = () => import('@/entities/order-book-process/task-add-book/task-add-book-details.vue');
+// prettier-ignore
+const OrderBookProcess_TaskAddBookExecute = () => import('@/entities/order-book-process/task-add-book/task-add-book-execute.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 export default [
@@ -207,6 +211,18 @@ export default [
     path: '/process-definition/OrderBookProcess/init',
     name: 'OrderBookProcessStartFormInit',
     component: OrderBookProcessStartFormInit,
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/process-definition/OrderBookProcess/task/TaskAddBook/:taskInstanceId/view',
+    name: 'OrderBookProcess_TaskAddBookDetails',
+    component: OrderBookProcess_TaskAddBookDetails,
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/process-definition/OrderBookProcess/task/TaskAddBook/:taskInstanceId/execute',
+    name: 'OrderBookProcess_TaskAddBookExecute',
+    component: OrderBookProcess_TaskAddBookExecute,
     meta: { authorities: [Authority.USER] },
   },
   // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here

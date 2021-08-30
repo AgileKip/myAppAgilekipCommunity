@@ -31,34 +31,6 @@
                     v-model="$v.orderBookProcess.order.number.$model"
                   />
                 </div>
-<!--                <div class="form-group">-->
-<!--                  <label-->
-<!--                    class="form-control-label"-->
-<!--                    v-text="$t('myAppAgilekipCommunityApp.orderBookProcessStartForm.book')"-->
-<!--                    for="order-book-process-start-form-book"-->
-<!--                    >Book</label-->
-<!--                  >-->
-<!--                  <select-->
-<!--                    class="form-control"-->
-<!--                    id="order-book-process-start-form-book"-->
-<!--                    data-cy="book"-->
-<!--                    name="book"-->
-<!--                    v-model="orderBookProcess.order.book"-->
-<!--                  >-->
-<!--                    <option v-bind:value="null"></option>-->
-<!--                    <option-->
-<!--                      v-bind:value="-->
-<!--                        orderBookProcess.order.book && bookOption.id === orderBookProcess.order.book.id-->
-<!--                          ? orderBookProcess.order.book-->
-<!--                          : bookOption-->
-<!--                      "-->
-<!--                      v-for="bookOption in books"-->
-<!--                      :key="bookOption.id"-->
-<!--                    >-->
-<!--                      {{ bookOption.title }}-->
-<!--                    </option>-->
-<!--                  </select>-->
-<!--                </div>-->
                 <div class="form-group">
                   <label
                     class="form-control-label"

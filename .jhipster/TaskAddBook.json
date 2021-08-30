@@ -2,19 +2,21 @@
   "fields": [
     {
       "fieldName": "number",
-      "fieldType": "String"
+      "fieldType": "String",
+      "readonly": "true"
     }
   ],
   "relationships": [
     {
       "relationshipType": "many-to-one",
-      "otherEntityName": "user",
-      "relationshipName": "user",
-      "otherEntityField": "login"
+      "otherEntityName": "book",
+      "relationshipName": "book",
+      "otherEntityField": "title"
     }
   ],
-  "entityType": "start-form",
+  "entityType": "user-task-form",
   "processBpmnId": "OrderBookProcess",
+  "taskBpmnId": "TaskAddBook",
   "domainEntityName": "Order",
   "processEntityName": "OrderBookProcess",
   "service": "serviceClass",
@@ -22,7 +24,7 @@
   "jpaMetamodelFiltering": false,
   "readOnly": false,
   "pagination": "no",
-  "name": "OrderBookProcessStartForm",
+  "name": "TaskAddBook",
   "changelogDate": "20210401000003",
   "skipFakeData": true
 }

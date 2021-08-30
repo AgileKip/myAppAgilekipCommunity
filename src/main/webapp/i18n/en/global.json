@@ -20,6 +20,7 @@
         "store": "Store",
         "orderBookProcess": "Order Book Process",
         "orderBookProcessStartForm": "Order Book Process Start Form",
+        "taskAddBook": "Task Add Book",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

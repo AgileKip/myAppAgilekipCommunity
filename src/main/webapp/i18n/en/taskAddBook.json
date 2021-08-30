@@ -1,0 +1,25 @@
+{
+  "myAppAgilekipCommunityApp": {
+    "taskAddBook": {
+      "home": {
+        "title": "Task Add Books",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Task Add Book",
+        "createOrEditLabel": "Create or edit a Task Add Book",
+        "notFound": "No Task Add Books found"
+      },
+      "created": "A new Task Add Book is created with identifier {{ param }}",
+      "updated": "A Task Add Book is updated with identifier {{ param }}",
+      "deleted": "A Task Add Book is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Task Add Book {{ id }}?"
+      },
+      "detail": {
+        "title": "Task Add Book"
+      },
+      "id": "ID",
+      "number": "Number",
+      "book": "Book"
+    }
+  }
+}

@@ -19,7 +19,6 @@
       },
       "id": "ID",
       "number": "Number",
-      "book": "Book",
       "user": "User"
     }
   }

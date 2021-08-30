@@ -30,20 +30,26 @@
               </div>
               <div class="card-body py-0">
                 <div class="form-group">
-                  <label class="form-control-label" v-text="$t('myAppAgilekipCommunityApp.orderBookProcess.deliveryMethod')"
-                    >deliveryMethod</label
+                  <label
+                      class="form-control-label"
+                      v-text="$t('myAppAgilekipCommunityApp.orderBookProcess.user')"
+                      for="order-book-process-user"
+                  >User</label
                   >
                   <input
-                    readonly
-                    type="text"
-                    class="form-control"
-                    name="deliveryMethod"
-                    id="order-deliveryMethod"
-                    data-cy="deliveryMethod"
-                    v-model="orderBookProcess.order.deliveryMethod"
+                      v-if="orderBookProcess.order.user"
+                      readonly
+                      type="text"
+                      class="form-control"
+                      name="user"
+                      id="order-user"
+                      data-cy="user"
+                      :value="orderBookProcess.order.user.login"
                   />
+                  <input v-else readonly type="text" class="form-control" name="user" id="order-user" data-cy="user" value="" />
                 </div>
               </div>
+
               <div class="card-body py-0">
                 <div class="form-group">
                   <label
@@ -65,27 +71,24 @@
                   <input v-else readonly type="text" class="form-control" name="book" id="order-book" data-cy="book" value="" />
                 </div>
               </div>
+
               <div class="card-body py-0">
                 <div class="form-group">
-                  <label
-                    class="form-control-label"
-                    v-text="$t('myAppAgilekipCommunityApp.orderBookProcess.user')"
-                    for="order-book-process-user"
-                    >User</label
+                  <label class="form-control-label" v-text="$t('myAppAgilekipCommunityApp.orderBookProcess.deliveryMethod')"
+                  >deliveryMethod</label
                   >
                   <input
-                    v-if="orderBookProcess.order.user"
-                    readonly
-                    type="text"
-                    class="form-control"
-                    name="user"
-                    id="order-user"
-                    data-cy="user"
-                    :value="orderBookProcess.order.user.login"
+                      readonly
+                      type="text"
+                      class="form-control"
+                      name="deliveryMethod"
+                      id="order-deliveryMethod"
+                      data-cy="deliveryMethod"
+                      v-model="orderBookProcess.order.deliveryMethod"
                   />
-                  <input v-else readonly type="text" class="form-control" name="user" id="order-user" data-cy="user" value="" />
                 </div>
               </div>
+
             </div>
           </template>
         </akip-show-process-instance>

@@ -1,8 +1,5 @@
 import { Component, Vue, Inject } from 'vue-property-decorator';
 
-import BookService from '@/entities/book/book.service';
-import { IBook } from '@/shared/model/book.model';
-
 import UserService from '@/admin/user-management/user-management.service';
 
 
@@ -27,14 +24,12 @@ const validations: any = {
 export default class OrderBookProcessStartFormInitComponent extends Vue {
   @Inject('orderBookProcessService') private orderBookProcessService: () => OrderBookProcessService;
   @Inject('processDefinitionService') private processDefinitionService: () => ProcessDefinitionService;
-  @Inject('bookService') private bookService: () => BookService;
   @Inject('userService') private userService: () => UserService;
 
   public bpmnProcessDefinitionId: string = 'OrderBookProcess';
   public orderBookProcess: IOrderBookProcess = new OrderBookProcess();
   public isSaving = false;
   public currentLanguage = '';
-  public books: IBook[] = [];
   public users: Array<any> = [];
 
   beforeRouteEnter(to, from, next) {
@@ -88,13 +83,6 @@ export default class OrderBookProcessStartFormInitComponent extends Vue {
         this.orderBookProcess.processInstance = new ProcessInstance();
         this.orderBookProcess.processInstance.processDefinition = res;
       });
-
-    this.bookService()
-        .retrieve()
-        .then(res => {
-          this.books = res.data;
-        })
-
     this.userService()
         .retrieve()
         .then(res => {
