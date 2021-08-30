@@ -10,7 +10,7 @@
       <div>
         <div class="row px-3 mb-3" v-if="processDefinition.description">
           <div class="col-sm description">
-            <div v-if="processDefinition.description">
+            <div>
               <vue-markdown>{{ processDefinition.description }}</vue-markdown>
             </div>
           </div>
