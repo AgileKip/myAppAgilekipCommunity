@@ -21,6 +21,9 @@
         "orderBookProcess": "Order Book Process",
         "orderBookProcessStartForm": "Order Book Process Start Form",
         "taskAddBook": "Task Add Book",
+        "taskSelectDelivery": "Task Select Delivery",
+        "taskAddShippingInfo": "Task Add Shipping Info",
+        "taskSelectPickUpStore": "Task Select Pick Up Store",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

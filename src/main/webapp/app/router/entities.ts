@@ -48,6 +48,18 @@ const OrderBookProcessStartFormInit = () => import('@/entities/order-book-proces
 const OrderBookProcess_TaskAddBookDetails = () => import('@/entities/order-book-process/task-add-book/task-add-book-details.vue');
 // prettier-ignore
 const OrderBookProcess_TaskAddBookExecute = () => import('@/entities/order-book-process/task-add-book/task-add-book-execute.vue');
+// prettier-ignore
+const OrderBookProcess_TaskSelectDeliveryDetails = () => import('@/entities/order-book-process/task-select-delivery/task-select-delivery-details.vue');
+// prettier-ignore
+const OrderBookProcess_TaskSelectDeliveryExecute = () => import('@/entities/order-book-process/task-select-delivery/task-select-delivery-execute.vue');
+// prettier-ignore
+const OrderBookProcess_TaskAddShippingInfoDetails = () => import('@/entities/order-book-process/task-add-shipping-info/task-add-shipping-info-details.vue');
+// prettier-ignore
+const OrderBookProcess_TaskAddShippingInfoExecute = () => import('@/entities/order-book-process/task-add-shipping-info/task-add-shipping-info-execute.vue');
+// prettier-ignore
+const OrderBookProcess_TaskSelectPickUpStoreDetails = () => import('@/entities/order-book-process/task-select-pick-up-store/task-select-pick-up-store-details.vue');
+// prettier-ignore
+const OrderBookProcess_TaskSelectPickUpStoreExecute = () => import('@/entities/order-book-process/task-select-pick-up-store/task-select-pick-up-store-execute.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 export default [
@@ -223,6 +235,42 @@ export default [
     path: '/process-definition/OrderBookProcess/task/TaskAddBook/:taskInstanceId/execute',
     name: 'OrderBookProcess_TaskAddBookExecute',
     component: OrderBookProcess_TaskAddBookExecute,
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/process-definition/OrderBookProcess/task/TaskSelectDelivery/:taskInstanceId/view',
+    name: 'OrderBookProcess_TaskSelectDeliveryDetails',
+    component: OrderBookProcess_TaskSelectDeliveryDetails,
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/process-definition/OrderBookProcess/task/TaskSelectDelivery/:taskInstanceId/execute',
+    name: 'OrderBookProcess_TaskSelectDeliveryExecute',
+    component: OrderBookProcess_TaskSelectDeliveryExecute,
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/process-definition/OrderBookProcess/task/TaskAddShippingInfo/:taskInstanceId/view',
+    name: 'OrderBookProcess_TaskAddShippingInfoDetails',
+    component: OrderBookProcess_TaskAddShippingInfoDetails,
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/process-definition/OrderBookProcess/task/TaskAddShippingInfo/:taskInstanceId/execute',
+    name: 'OrderBookProcess_TaskAddShippingInfoExecute',
+    component: OrderBookProcess_TaskAddShippingInfoExecute,
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/process-definition/OrderBookProcess/task/TaskSelectPickUpStore/:taskInstanceId/view',
+    name: 'OrderBookProcess_TaskSelectPickUpStoreDetails',
+    component: OrderBookProcess_TaskSelectPickUpStoreDetails,
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/process-definition/OrderBookProcess/task/TaskSelectPickUpStore/:taskInstanceId/execute',
+    name: 'OrderBookProcess_TaskSelectPickUpStoreExecute',
+    component: OrderBookProcess_TaskSelectPickUpStoreExecute,
     meta: { authorities: [Authority.USER] },
   },
   // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
