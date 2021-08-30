@@ -1,0 +1,27 @@
+{
+  "myAppAgilekipCommunityApp": {
+    "orderBookProcess": {
+      "home": {
+        "title": "Order Book Processes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Order Book Process",
+        "createOrEditLabel": "Create or edit a Order Book Process",
+        "notFound": "No Order Book Processes found"
+      },
+      "created": "A new Order Book Process is created with identifier {{ param }}",
+      "updated": "A Order Book Process is updated with identifier {{ param }}",
+      "deleted": "A Order Book Process is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Order Book Process {{ id }}?"
+      },
+      "detail": {
+        "title": "Order Book Process"
+      },
+      "id": "ID",
+      "number": "Number",
+      "deliveryMethod": "Delivery Method",
+      "book": "Book",
+      "user": "User"
+    }
+  }
+}

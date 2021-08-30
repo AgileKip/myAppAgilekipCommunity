@@ -52,6 +52,7 @@ import OrderService from '@/entities/order/order.service';
 import OrderBookService from '@/entities/order-book/order-book.service';
 import PublisherService from '@/entities/publisher/publisher.service';
 import StoreService from '@/entities/store/store.service';
+import OrderBookProcessService from '@/entities/order-book-process/order-book-process.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 /* tslint:enable */
@@ -136,6 +137,7 @@ new Vue({
     orderBookService: () => new OrderBookService(),
     publisherService: () => new PublisherService(),
     storeService: () => new StoreService(),
+    orderBookProcessService: () => new OrderBookProcessService(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService,
   },

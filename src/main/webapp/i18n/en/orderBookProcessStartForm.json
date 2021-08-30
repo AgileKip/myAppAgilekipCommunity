@@ -1,0 +1,26 @@
+{
+  "myAppAgilekipCommunityApp": {
+    "orderBookProcessStartForm": {
+      "home": {
+        "title": "Order Book Process Start Forms",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Order Book Process Start Form",
+        "createOrEditLabel": "Create or edit a Order Book Process Start Form",
+        "notFound": "No Order Book Process Start Forms found"
+      },
+      "created": "A new Order Book Process Start Form is created with identifier {{ param }}",
+      "updated": "A Order Book Process Start Form is updated with identifier {{ param }}",
+      "deleted": "A Order Book Process Start Form is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Order Book Process Start Form {{ id }}?"
+      },
+      "detail": {
+        "title": "Order Book Process Start Form"
+      },
+      "id": "ID",
+      "number": "Number",
+      "book": "Book",
+      "user": "User"
+    }
+  }
+}

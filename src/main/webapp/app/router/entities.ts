@@ -38,6 +38,12 @@ const Store = () => import('@/entities/store/store.vue');
 const StoreUpdate = () => import('@/entities/store/store-update.vue');
 // prettier-ignore
 const StoreDetails = () => import('@/entities/store/store-details.vue');
+// prettier-ignore
+const OrderBookProcessDetails = () => import('@/entities/order-book-process/order-book-process-details.vue');
+// prettier-ignore
+const OrderBookProcessList = () => import('@/entities/order-book-process/order-book-process-list.vue');
+// prettier-ignore
+const OrderBookProcessStartFormInit = () => import('@/entities/order-book-process/order-book-process-start-form-init.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 export default [
@@ -183,6 +189,24 @@ export default [
     path: '/store/:storeId/view',
     name: 'StoreView',
     component: StoreDetails,
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/process-definition/OrderBookProcess/instance/:processInstanceId/view',
+    name: 'OrderBookProcessView',
+    component: OrderBookProcessDetails,
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/process-definition/OrderBookProcess/instances',
+    name: 'OrderBookProcessList',
+    component: OrderBookProcessList,
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/process-definition/OrderBookProcess/init',
+    name: 'OrderBookProcessStartFormInit',
+    component: OrderBookProcessStartFormInit,
     meta: { authorities: [Authority.USER] },
   },
   // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here

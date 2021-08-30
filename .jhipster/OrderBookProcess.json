@@ -1,0 +1,38 @@
+{
+  "fields": [
+    {
+      "fieldName": "number",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deliveryMethod",
+      "fieldType": "DeliveryMethod",
+      "fieldValues": "PICKUP,DELIVERY"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "book",
+      "relationshipName": "book",
+      "otherEntityField": "title"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "otherEntityField": "login"
+    }
+  ],
+  "entityType": "process-binding",
+  "processBpmnId": "OrderBookProcess",
+  "domainEntityName": "Order",
+  "service": "serviceClass",
+  "dto": "mapstruct",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "no",
+  "name": "OrderBookProcess",
+  "changelogDate": "20210401000002",
+  "skipFakeData": true
+}
