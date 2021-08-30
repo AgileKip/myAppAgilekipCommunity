@@ -21,8 +21,6 @@ const OrderUpdate = () => import('@/entities/order/order-update.vue');
 // prettier-ignore
 const OrderDetails = () => import('@/entities/order/order-details.vue');
 // prettier-ignore
-const OrderBook = () => import('@/entities/order-book/order-book.vue');
-// prettier-ignore
 const Publisher = () => import('@/entities/publisher/publisher.vue');
 // prettier-ignore
 const PublisherUpdate = () => import('@/entities/publisher/publisher-update.vue');
@@ -133,12 +131,6 @@ export default [
     path: '/order/:orderId/view',
     name: 'OrderView',
     component: OrderDetails,
-    meta: { authorities: [Authority.USER] },
-  },
-  {
-    path: '/order-book',
-    name: 'OrderBook',
-    component: OrderBook,
     meta: { authorities: [Authority.USER] },
   },
   {
