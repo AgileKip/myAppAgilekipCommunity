@@ -24,6 +24,7 @@
         "taskSelectDelivery": "Task Select Delivery",
         "taskAddShippingInfo": "Task Add Shipping Info",
         "taskSelectPickUpStore": "Task Select Pick Up Store",
+        "taskPayBook": "Task Pay Book",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

@@ -16,6 +16,7 @@
                 >Number</label
               >
               <input
+                  readonly
                 type="text"
                 class="form-control"
                 name="number"

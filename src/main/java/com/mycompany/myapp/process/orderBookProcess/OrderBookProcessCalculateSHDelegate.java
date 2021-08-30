@@ -29,7 +29,11 @@ public class OrderBookProcessCalculateSHDelegate implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
+        log.debug("#########################################################################################");
+        log.debug("#########################################################################################");
         log.debug("Inicio de " + OrderBookProcessCalculateSHDelegate.class.getSimpleName());
+        log.debug("#########################################################################################");
+        log.debug("#########################################################################################");
         OrderBookProcessDTO orderBookProcessDTO = (OrderBookProcessDTO) delegateExecution.getVariable(
                 CamundaConstants.PROCESS_INSTANCE
         );

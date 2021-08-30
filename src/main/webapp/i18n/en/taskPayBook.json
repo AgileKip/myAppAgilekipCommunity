@@ -1,0 +1,28 @@
+{
+  "myAppAgilekipCommunityApp": {
+    "taskPayBook": {
+      "home": {
+        "title": "Task Pay Books",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Task Pay Book",
+        "createOrEditLabel": "Create or edit a Task Pay Book",
+        "notFound": "No Task Pay Books found"
+      },
+      "created": "A new Task Pay Book is created with identifier {{ param }}",
+      "updated": "A Task Pay Book is updated with identifier {{ param }}",
+      "deleted": "A Task Pay Book is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Task Pay Book {{ id }}?"
+      },
+      "detail": {
+        "title": "Task Pay Book"
+      },
+      "id": "ID",
+      "number": "Number",
+      "total": "Total",
+      "ccNumber": "Cc Number",
+      "ccDate": "Cc Date",
+      "ccVerifierDigit": "Cc Verifier Digit"
+    }
+  }
+}

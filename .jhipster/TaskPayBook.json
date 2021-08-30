@@ -1,0 +1,40 @@
+{
+  "fields": [
+    {
+      "fieldName": "number",
+      "fieldType": "String",
+      "readonly": "true"
+    },
+    {
+      "fieldName": "total",
+      "fieldType": "String",
+      "readonly": "true"
+    },
+    {
+      "fieldName": "ccNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ccDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ccVerifierDigit",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "entityType": "user-task-form",
+  "processBpmnId": "OrderBookProcess",
+  "taskBpmnId": "TaskPayBook",
+  "domainEntityName": "Order",
+  "processEntityName": "OrderBookProcess",
+  "service": "serviceClass",
+  "dto": "mapstruct",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "no",
+  "name": "TaskPayBook",
+  "changelogDate": "20210401000007",
+  "skipFakeData": true
+}

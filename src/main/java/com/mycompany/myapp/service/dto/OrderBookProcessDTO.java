@@ -14,6 +14,8 @@ public class OrderBookProcessDTO implements Serializable {
 
     private OrderDTO order;
 
+    private Boolean hasAnyProblem = Boolean.FALSE;
+
     public Long getId() {
         return id;
     }
@@ -36,6 +38,14 @@ public class OrderBookProcessDTO implements Serializable {
 
     public void setOrder(OrderDTO order) {
         this.order = order;
+    }
+
+    public Boolean getHasAnyProblem() {
+        return hasAnyProblem;
+    }
+
+    public void setHasAnyProblem(Boolean hasAnyProblem) {
+        this.hasAnyProblem = hasAnyProblem;
     }
 
     @Override
