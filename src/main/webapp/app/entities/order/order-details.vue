@@ -67,6 +67,14 @@
             <span>{{ order.total }}</span>
           </dd>
           <dt>
+            <span v-text="$t('myAppAgilekipCommunityApp.order.book')">Book</span>
+          </dt>
+          <dd>
+            <div v-if="order.book">
+              <router-link :to="{ name: 'BookView', params: { bookId: order.book.id } }">{{ order.book.title }}</router-link>
+            </div>
+          </dd>
+          <dt>
             <span v-text="$t('myAppAgilekipCommunityApp.order.user')">User</span>
           </dt>
           <dd>

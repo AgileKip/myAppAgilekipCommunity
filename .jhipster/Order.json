@@ -47,6 +47,12 @@
   "relationships": [
     {
       "relationshipType": "many-to-one",
+      "otherEntityName": "book",
+      "relationshipName": "book",
+      "otherEntityField": "title"
+    },
+    {
+      "relationshipType": "many-to-one",
       "otherEntityName": "user",
       "relationshipName": "user",
       "otherEntityField": "login"
@@ -56,12 +62,6 @@
       "otherEntityName": "store",
       "relationshipName": "store",
       "otherEntityField": "name"
-    },
-    {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "orderBook",
-      "otherEntityRelationshipName": "order",
-      "relationshipName": "orderBook"
     }
   ],
   "entityTableName": "jhi_order",

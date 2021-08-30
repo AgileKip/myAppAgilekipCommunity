@@ -37,25 +37,21 @@
             <font-awesome-icon icon="asterisk" />
             <span v-text="$t('global.menu.entities.author')">Author</span>
           </b-dropdown-item>
-          <b-dropdown-item to="/book">
-            <font-awesome-icon icon="asterisk" />
-            <span v-text="$t('global.menu.entities.book')">Book</span>
-          </b-dropdown-item>
-          <b-dropdown-item to="/order">
-            <font-awesome-icon icon="asterisk" />
-            <span v-text="$t('global.menu.entities.order')">Order</span>
-          </b-dropdown-item>
-          <b-dropdown-item to="/order-book">
-            <font-awesome-icon icon="asterisk" />
-            <span v-text="$t('global.menu.entities.orderBook')">Order Book</span>
-          </b-dropdown-item>
           <b-dropdown-item to="/publisher">
             <font-awesome-icon icon="asterisk" />
             <span v-text="$t('global.menu.entities.publisher')">Publisher</span>
           </b-dropdown-item>
+          <b-dropdown-item to="/book">
+            <font-awesome-icon icon="asterisk" />
+            <span v-text="$t('global.menu.entities.book')">Book</span>
+          </b-dropdown-item>
           <b-dropdown-item to="/store">
             <font-awesome-icon icon="asterisk" />
             <span v-text="$t('global.menu.entities.store')">Store</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/order">
+            <font-awesome-icon icon="asterisk" />
+            <span v-text="$t('global.menu.entities.order')">Order</span>
           </b-dropdown-item>
           <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
         </b-nav-item-dropdown>

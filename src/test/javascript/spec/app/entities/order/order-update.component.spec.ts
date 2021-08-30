@@ -8,11 +8,11 @@ import OrderUpdateComponent from '@/entities/order/order-update.vue';
 import OrderClass from '@/entities/order/order-update.component';
 import OrderService from '@/entities/order/order.service';
 
+import BookService from '@/entities/book/book.service';
+
 import UserService from '@/admin/user-management/user-management.service';
 
 import StoreService from '@/entities/store/store.service';
-
-import OrderBookService from '@/entities/order-book/order-book.service';
 
 const localVue = createLocalVue();
 
@@ -44,11 +44,11 @@ describe('Component Tests', () => {
         provide: {
           orderService: () => orderServiceStub,
 
+          bookService: () => new BookService(),
+
           userService: () => new UserService(),
 
           storeService: () => new StoreService(),
-
-          orderBookService: () => new OrderBookService(),
         },
       });
       comp = wrapper.vm;

@@ -12,8 +12,6 @@ import PublisherService from '@/entities/publisher/publisher.service';
 
 import AuthorService from '@/entities/author/author.service';
 
-import OrderBookService from '@/entities/order-book/order-book.service';
-
 const localVue = createLocalVue();
 
 config.initVueApp(localVue);
@@ -47,8 +45,6 @@ describe('Component Tests', () => {
           publisherService: () => new PublisherService(),
 
           authorService: () => new AuthorService(),
-
-          orderBookService: () => new OrderBookService(),
         },
       });
       comp = wrapper.vm;

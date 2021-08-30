@@ -33,6 +33,8 @@ public class OrderDTO implements Serializable {
 
     private Integer total;
 
+    private BookDTO book;
+
     private UserDTO user;
 
     private StoreDTO store;
@@ -125,6 +127,14 @@ public class OrderDTO implements Serializable {
         this.total = total;
     }
 
+    public BookDTO getBook() {
+        return book;
+    }
+
+    public void setBook(BookDTO book) {
+        this.book = book;
+    }
+
     public UserDTO getUser() {
         return user;
     }
@@ -177,6 +187,7 @@ public class OrderDTO implements Serializable {
             ", ccDate='" + getCcDate() + "'" +
             ", ccVerifierDigit='" + getCcVerifierDigit() + "'" +
             ", total=" + getTotal() +
+            ", book=" + getBook() +
             ", user=" + getUser() +
             ", store=" + getStore() +
             "}";

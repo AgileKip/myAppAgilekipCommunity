@@ -18,19 +18,15 @@
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "publisher",
-      "relationshipName": "publisher"
+      "relationshipName": "publisher",
+      "otherEntityField": "name"
     },
     {
       "relationshipType": "many-to-many",
       "otherEntityName": "author",
       "relationshipName": "authors",
+      "otherEntityField": "name",
       "ownerSide": true
-    },
-    {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "orderBook",
-      "otherEntityRelationshipName": "book",
-      "relationshipName": "orderBook"
     }
   ],
   "entityTableName": "book",
@@ -40,8 +36,6 @@
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,
   "readOnly": false,
-  "embedded": false,
-  "applications": "*",
   "skipFakeData": true,
-  "changelogDate": "20210830065628"
+  "changelogDate": "20210830073501"
 }

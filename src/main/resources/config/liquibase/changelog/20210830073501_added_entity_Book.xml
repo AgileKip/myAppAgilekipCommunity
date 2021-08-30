@@ -9,7 +9,7 @@
     <!--
         Added the entity Book.
     -->
-    <changeSet id="20210830065628-1" author="jhipster">
+    <changeSet id="20210830073501-1" author="jhipster">
         <createTable tableName="book">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
@@ -30,7 +30,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="20210830065628-1-relations" author="jhipster">
+    <changeSet id="20210830073501-1-relations" author="jhipster">
 
         <createTable tableName="rel_book__authors">
             <column name="authors_id" type="bigint">

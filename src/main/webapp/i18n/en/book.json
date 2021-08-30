@@ -22,8 +22,7 @@
       "pubYear": "Pub Year",
       "price": "Price",
       "publisher": "Publisher",
-      "authors": "Authors",
-      "orderBook": "Order Book"
+      "authors": "Authors"
     }
   }
 }

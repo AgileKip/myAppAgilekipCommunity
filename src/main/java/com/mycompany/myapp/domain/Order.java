@@ -3,8 +3,6 @@ package com.mycompany.myapp.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.mycompany.myapp.domain.enumeration.DeliveryMethod;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -58,15 +56,14 @@ public class Order implements Serializable {
     private Integer total;
 
     @ManyToOne
+    @JsonIgnoreProperties(value = { "publisher", "authors" }, allowSetters = true)
+    private Book book;
+
+    @ManyToOne
     private User user;
 
     @ManyToOne
     private Store store;
-
-    @OneToMany(mappedBy = "order")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "order", "book" }, allowSetters = true)
-    private Set<OrderBook> orderBooks = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -212,6 +209,19 @@ public class Order implements Serializable {
         this.total = total;
     }
 
+    public Book getBook() {
+        return this.book;
+    }
+
+    public Order book(Book book) {
+        this.setBook(book);
+        return this;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
     public User getUser() {
         return this.user;
     }
@@ -236,37 +246,6 @@ public class Order implements Serializable {
 
     public void setStore(Store store) {
         this.store = store;
-    }
-
-    public Set<OrderBook> getOrderBooks() {
-        return this.orderBooks;
-    }
-
-    public Order orderBooks(Set<OrderBook> orderBooks) {
-        this.setOrderBooks(orderBooks);
-        return this;
-    }
-
-    public Order addOrderBook(OrderBook orderBook) {
-        this.orderBooks.add(orderBook);
-        orderBook.setOrder(this);
-        return this;
-    }
-
-    public Order removeOrderBook(OrderBook orderBook) {
-        this.orderBooks.remove(orderBook);
-        orderBook.setOrder(null);
-        return this;
-    }
-
-    public void setOrderBooks(Set<OrderBook> orderBooks) {
-        if (this.orderBooks != null) {
-            this.orderBooks.forEach(i -> i.setOrder(null));
-        }
-        if (orderBooks != null) {
-            orderBooks.forEach(i -> i.setOrder(this));
-        }
-        this.orderBooks = orderBooks;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

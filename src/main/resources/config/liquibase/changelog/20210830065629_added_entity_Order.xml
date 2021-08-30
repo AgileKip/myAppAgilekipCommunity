@@ -44,6 +44,9 @@
             <column name="total" type="integer">
                 <constraints nullable="true" />
             </column>
+            <column name="book_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>

@@ -1,6 +1,6 @@
+import { IBook } from '@/shared/model/book.model';
 import { IUser } from '@/shared/model/user.model';
 import { IStore } from '@/shared/model/store.model';
-import { IOrderBook } from '@/shared/model/order-book.model';
 
 import { DeliveryMethod } from '@/shared/model/enumerations/delivery-method.model';
 export interface IOrder {
@@ -15,9 +15,9 @@ export interface IOrder {
   ccDate?: string | null;
   ccVerifierDigit?: string | null;
   total?: number | null;
+  book?: IBook | null;
   user?: IUser | null;
   store?: IStore | null;
-  orderBooks?: IOrderBook[] | null;
 }
 
 export class Order implements IOrder {
@@ -33,8 +33,8 @@ export class Order implements IOrder {
     public ccDate?: string | null,
     public ccVerifierDigit?: string | null,
     public total?: number | null,
+    public book?: IBook | null,
     public user?: IUser | null,
-    public store?: IStore | null,
-    public orderBooks?: IOrderBook[] | null
+    public store?: IStore | null
   ) {}
 }

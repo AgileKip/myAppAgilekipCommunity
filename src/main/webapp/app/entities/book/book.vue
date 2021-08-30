@@ -43,7 +43,7 @@
             <td>
               <div v-if="book.publisher">
                 <router-link :to="{ name: 'PublisherView', params: { publisherId: book.publisher.id } }">{{
-                  book.publisher.id
+                  book.publisher.name
                 }}</router-link>
               </div>
             </td>
@@ -51,7 +51,7 @@
               <span v-for="(authors, i) in book.authors" :key="authors.id"
                 >{{ i > 0 ? ', ' : '' }}
                 <router-link class="form-control-static" :to="{ name: 'AuthorView', params: { authorId: authors.id } }">{{
-                  authors.id
+                  authors.name
                 }}</router-link>
               </span>
             </td>

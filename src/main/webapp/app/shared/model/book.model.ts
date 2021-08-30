@@ -1,6 +1,5 @@
 import { IPublisher } from '@/shared/model/publisher.model';
 import { IAuthor } from '@/shared/model/author.model';
-import { IOrderBook } from '@/shared/model/order-book.model';
 
 export interface IBook {
   id?: number;
@@ -9,7 +8,6 @@ export interface IBook {
   price?: number | null;
   publisher?: IPublisher | null;
   authors?: IAuthor[] | null;
-  orderBooks?: IOrderBook[] | null;
 }
 
 export class Book implements IBook {
@@ -19,7 +17,6 @@ export class Book implements IBook {
     public pubYear?: string | null,
     public price?: number | null,
     public publisher?: IPublisher | null,
-    public authors?: IAuthor[] | null,
-    public orderBooks?: IOrderBook[] | null
+    public authors?: IAuthor[] | null
   ) {}
 }

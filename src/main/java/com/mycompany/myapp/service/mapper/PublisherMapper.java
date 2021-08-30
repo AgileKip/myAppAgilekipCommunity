@@ -9,8 +9,9 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring", uses = {})
 public interface PublisherMapper extends EntityMapper<PublisherDTO, Publisher> {
-    @Named("id")
+    @Named("name")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
-    PublisherDTO toDtoId(Publisher publisher);
+    @Mapping(target = "name", source = "name")
+    PublisherDTO toDtoName(Publisher publisher);
 }

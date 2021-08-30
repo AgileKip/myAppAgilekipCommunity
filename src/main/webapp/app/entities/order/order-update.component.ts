@@ -2,13 +2,13 @@ import { Component, Vue, Inject } from 'vue-property-decorator';
 
 import { required } from 'vuelidate/lib/validators';
 
+import BookService from '@/entities/book/book.service';
+import { IBook } from '@/shared/model/book.model';
+
 import UserService from '@/admin/user-management/user-management.service';
 
 import StoreService from '@/entities/store/store.service';
 import { IStore } from '@/shared/model/store.model';
-
-import OrderBookService from '@/entities/order-book/order-book.service';
-import { IOrderBook } from '@/shared/model/order-book.model';
 
 import { IOrder, Order } from '@/shared/model/order.model';
 import OrderService from './order.service';
@@ -37,6 +37,10 @@ export default class OrderUpdate extends Vue {
   @Inject('orderService') private orderService: () => OrderService;
   public order: IOrder = new Order();
 
+  @Inject('bookService') private bookService: () => BookService;
+
+  public books: IBook[] = [];
+
   @Inject('userService') private userService: () => UserService;
 
   public users: Array<any> = [];
@@ -44,10 +48,6 @@ export default class OrderUpdate extends Vue {
   @Inject('storeService') private storeService: () => StoreService;
 
   public stores: IStore[] = [];
-
-  @Inject('orderBookService') private orderBookService: () => OrderBookService;
-
-  public orderBooks: IOrderBook[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -118,6 +118,11 @@ export default class OrderUpdate extends Vue {
   }
 
   public initRelationships(): void {
+    this.bookService()
+      .retrieve()
+      .then(res => {
+        this.books = res.data;
+      });
     this.userService()
       .retrieve()
       .then(res => {
@@ -127,11 +132,6 @@ export default class OrderUpdate extends Vue {
       .retrieve()
       .then(res => {
         this.stores = res.data;
-      });
-    this.orderBookService()
-      .retrieve()
-      .then(res => {
-        this.orderBooks = res.data;
       });
   }
 }

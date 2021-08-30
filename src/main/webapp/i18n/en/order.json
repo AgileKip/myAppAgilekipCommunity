@@ -28,9 +28,9 @@
       "ccDate": "Cc Date",
       "ccVerifierDigit": "Cc Verifier Digit",
       "total": "Total",
+      "book": "Book",
       "user": "User",
-      "store": "Store",
-      "orderBook": "Order Book"
+      "store": "Store"
     }
   }
 }

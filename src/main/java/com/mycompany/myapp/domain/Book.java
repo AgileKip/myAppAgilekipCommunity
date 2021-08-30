@@ -1,6 +1,5 @@
 package com.mycompany.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -43,11 +42,6 @@ public class Book implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "authors_id")
     )
     private Set<Author> authors = new HashSet<>();
-
-    @OneToMany(mappedBy = "book")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "order", "book" }, allowSetters = true)
-    private Set<OrderBook> orderBooks = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -136,37 +130,6 @@ public class Book implements Serializable {
 
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;
-    }
-
-    public Set<OrderBook> getOrderBooks() {
-        return this.orderBooks;
-    }
-
-    public Book orderBooks(Set<OrderBook> orderBooks) {
-        this.setOrderBooks(orderBooks);
-        return this;
-    }
-
-    public Book addOrderBook(OrderBook orderBook) {
-        this.orderBooks.add(orderBook);
-        orderBook.setBook(this);
-        return this;
-    }
-
-    public Book removeOrderBook(OrderBook orderBook) {
-        this.orderBooks.remove(orderBook);
-        orderBook.setBook(null);
-        return this;
-    }
-
-    public void setOrderBooks(Set<OrderBook> orderBooks) {
-        if (this.orderBooks != null) {
-            this.orderBooks.forEach(i -> i.setBook(null));
-        }
-        if (orderBooks != null) {
-            orderBooks.forEach(i -> i.setBook(this));
-        }
-        this.orderBooks = orderBooks;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

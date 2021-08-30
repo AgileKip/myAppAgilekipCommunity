@@ -39,6 +39,7 @@
             <th scope="row"><span v-text="$t('myAppAgilekipCommunityApp.order.ccDate')">Cc Date</span></th>
             <th scope="row"><span v-text="$t('myAppAgilekipCommunityApp.order.ccVerifierDigit')">Cc Verifier Digit</span></th>
             <th scope="row"><span v-text="$t('myAppAgilekipCommunityApp.order.total')">Total</span></th>
+            <th scope="row"><span v-text="$t('myAppAgilekipCommunityApp.order.book')">Book</span></th>
             <th scope="row"><span v-text="$t('myAppAgilekipCommunityApp.order.user')">User</span></th>
             <th scope="row"><span v-text="$t('myAppAgilekipCommunityApp.order.store')">Store</span></th>
             <th scope="row"></th>
@@ -59,6 +60,11 @@
             <td>{{ order.ccDate }}</td>
             <td>{{ order.ccVerifierDigit }}</td>
             <td>{{ order.total }}</td>
+            <td>
+              <div v-if="order.book">
+                <router-link :to="{ name: 'BookView', params: { bookId: order.book.id } }">{{ order.book.title }}</router-link>
+              </div>
+            </td>
             <td>
               {{ order.user ? order.user.login : '' }}
             </td>

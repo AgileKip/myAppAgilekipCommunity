@@ -59,7 +59,7 @@
                 v-for="publisherOption in publishers"
                 :key="publisherOption.id"
               >
-                {{ publisherOption.id }}
+                {{ publisherOption.name }}
               </option>
             </select>
           </div>
@@ -75,7 +75,7 @@
               v-model="book.authors"
             >
               <option v-bind:value="getSelected(book.authors, authorOption)" v-for="authorOption in authors" :key="authorOption.id">
-                {{ authorOption.id }}
+                {{ authorOption.name }}
               </option>
             </select>
           </div>

@@ -153,6 +153,19 @@
             />
           </div>
           <div class="form-group">
+            <label class="form-control-label" v-text="$t('myAppAgilekipCommunityApp.order.book')" for="order-book">Book</label>
+            <select class="form-control" id="order-book" data-cy="book" name="book" v-model="order.book">
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="order.book && bookOption.id === order.book.id ? order.book : bookOption"
+                v-for="bookOption in books"
+                :key="bookOption.id"
+              >
+                {{ bookOption.title }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
             <label class="form-control-label" v-text="$t('myAppAgilekipCommunityApp.order.user')" for="order-user">User</label>
             <select class="form-control" id="order-user" data-cy="user" name="user" v-model="order.user">
               <option v-bind:value="null"></option>

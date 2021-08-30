@@ -29,7 +29,9 @@
           </dt>
           <dd>
             <div v-if="book.publisher">
-              <router-link :to="{ name: 'PublisherView', params: { publisherId: book.publisher.id } }">{{ book.publisher.id }}</router-link>
+              <router-link :to="{ name: 'PublisherView', params: { publisherId: book.publisher.id } }">{{
+                book.publisher.name
+              }}</router-link>
             </div>
           </dd>
           <dt>
@@ -38,7 +40,7 @@
           <dd>
             <span v-for="(authors, i) in book.authors" :key="authors.id"
               >{{ i > 0 ? ', ' : '' }}
-              <router-link :to="{ name: 'AuthorView', params: { authorId: authors.id } }">{{ authors.id }}</router-link>
+              <router-link :to="{ name: 'AuthorView', params: { authorId: authors.id } }">{{ authors.name }}</router-link>
             </span>
           </dd>
         </dl>

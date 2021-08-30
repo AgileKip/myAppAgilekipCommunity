@@ -6,9 +6,6 @@ import { IPublisher } from '@/shared/model/publisher.model';
 import AuthorService from '@/entities/author/author.service';
 import { IAuthor } from '@/shared/model/author.model';
 
-import OrderBookService from '@/entities/order-book/order-book.service';
-import { IOrderBook } from '@/shared/model/order-book.model';
-
 import { IBook, Book } from '@/shared/model/book.model';
 import BookService from './book.service';
 
@@ -34,10 +31,6 @@ export default class BookUpdate extends Vue {
   @Inject('authorService') private authorService: () => AuthorService;
 
   public authors: IAuthor[] = [];
-
-  @Inject('orderBookService') private orderBookService: () => OrderBookService;
-
-  public orderBooks: IOrderBook[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -118,11 +111,6 @@ export default class BookUpdate extends Vue {
       .retrieve()
       .then(res => {
         this.authors = res.data;
-      });
-    this.orderBookService()
-      .retrieve()
-      .then(res => {
-        this.orderBooks = res.data;
       });
   }
 

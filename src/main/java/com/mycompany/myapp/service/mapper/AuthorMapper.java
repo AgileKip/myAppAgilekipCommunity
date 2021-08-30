@@ -10,8 +10,9 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring", uses = {})
 public interface AuthorMapper extends EntityMapper<AuthorDTO, Author> {
-    @Named("idSet")
+    @Named("nameSet")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
-    Set<AuthorDTO> toDtoIdSet(Set<Author> author);
+    @Mapping(target = "name", source = "name")
+    Set<AuthorDTO> toDtoNameSet(Set<Author> author);
 }
