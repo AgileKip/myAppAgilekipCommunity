@@ -1,0 +1,9 @@
+{
+  "myAppAgilekipCommunityApp": {
+    "DeliveryMethod": {
+      "null": "",
+      "PICKUP": "PICKUP",
+      "DELIVERY": "DELIVERY"
+    }
+  }
+}

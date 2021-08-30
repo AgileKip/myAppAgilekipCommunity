@@ -1,0 +1,77 @@
+{
+  "name": "Order",
+  "fields": [
+    {
+      "fieldName": "number",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "streetAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "postalCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "city",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "stateProvince",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deliveryMethod",
+      "fieldType": "DeliveryMethod",
+      "fieldValues": "PICKUP,DELIVERY"
+    },
+    {
+      "fieldName": "ccNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ccDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ccVerifierDigit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "total",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "store",
+      "relationshipName": "store"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "orderBook",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "orderBook"
+    }
+  ],
+  "entityTableName": "order",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*"
+}

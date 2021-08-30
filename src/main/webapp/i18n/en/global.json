@@ -12,6 +12,12 @@
         "processInstance": "Process Instances",
         "taskInstance": "All Tasks",
         "myCandidateTasks": "My Tasks",
+        "author": "Author",
+        "book": "Book",
+        "order": "Order",
+        "orderBook": "Order Book",
+        "publisher": "Publisher",
+        "store": "Store",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

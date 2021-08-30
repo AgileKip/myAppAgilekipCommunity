@@ -52,6 +52,8 @@
     "packageFolder": "com/mycompany/myapp",
     "jwtSecretKey": "NDQ4Zjc5MGIwYzE2Mzc5NWQ5NGM5OTEwZDYxYzlhOGM5N2FhZDZiZmQwZjk4OTFjODg0OGMxMjdiMDkwYTk3ZjIzMWFlZGY2MzY1ZWUzZjlhYjVkYjRjNzJmY2Y4YzgzYWUzZDM2Y2Y0ZmU5MmI1M2U2NTQ1ZTI3ZmZiYzQzYzI=",
     "clientPackageManager": "npm",
-    "languages": ["en"]
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1630306592000,
+    "entities": ["Author"]
   }
 }

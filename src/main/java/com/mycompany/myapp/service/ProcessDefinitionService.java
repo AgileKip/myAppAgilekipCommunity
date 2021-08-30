@@ -1,16 +1,23 @@
 package com.mycompany.myapp.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.myapp.domain.ProcessDefinition;
 import com.mycompany.myapp.domain.enumeration.StatusProcessDefinition;
 import com.mycompany.myapp.repository.ProcessDefinitionRepository;
 import com.mycompany.myapp.service.dto.ProcessDefinitionDTO;
 import com.mycompany.myapp.service.mapper.ProcessDefinitionMapper;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
+import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.Process;
+import org.camunda.bpm.model.bpmn.instance.camunda.CamundaProperties;
 import org.camunda.bpm.model.xml.type.ModelElementType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -138,4 +145,43 @@ public class ProcessDefinitionService {
         log.debug("Request to delete ProcessDefinition : {}", id);
         processDefinitionRepository.deleteById(id);
     }
+
+    public static void main(String[] args) {
+        try {
+            File f = new File(
+                    "/Users/utelemaco/development/workspaceJHipster7/blueprint-example/anotherProcess/anotherProcess.bpmn"
+            );
+            FileInputStream fis = new FileInputStream(f);
+            BpmnModelInstance modelInstance = Bpmn.readModelFromStream(fis);
+
+            ProcessDefinitionService processDefinitionService = new ProcessDefinitionService(null, null);
+            Process process = processDefinitionService.extracAndValidProcessFromModel(modelInstance);
+            if (!process.getDocumentations().isEmpty()) {
+                System.out.println(process.getDocumentations().iterator().next().getRawTextContent());
+            }
+
+            if (process.getExtensionElements() != null && process.getExtensionElements().getElementsQuery().filterByType(CamundaProperties.class).count() > 0) {
+                Map<String, String> deploymentProperties = new HashMap<>();
+                CamundaProperties camundaProperties = process.getExtensionElements().getElementsQuery().filterByType(CamundaProperties.class).singleResult();
+                camundaProperties.getCamundaProperties().forEach(camundaProperty -> {
+                    deploymentProperties.put(camundaProperty.getCamundaName(), camundaProperty.getCamundaValue());
+                    System.out.println("Camunda Property Id: " + camundaProperty.getCamundaId());
+                    System.out.println("Camunda Property Name: " + camundaProperty.getCamundaName());
+                    System.out.println("Camunda Property Value: " + camundaProperty.getCamundaValue());
+                });
+                ObjectMapper objectMapper = new ObjectMapper();
+                String s = objectMapper.writeValueAsString(deploymentProperties);
+                System.out.println(deploymentProperties);
+                Map<String, String> map = objectMapper.readValue(s, new TypeReference<Map<String, String>>(){});
+                System.out.println(map);
+
+            }
+
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 }

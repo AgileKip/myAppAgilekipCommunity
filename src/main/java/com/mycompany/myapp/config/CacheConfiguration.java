@@ -52,6 +52,15 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.ProcessDeployment.class.getName());
             createCache(cm, com.mycompany.myapp.domain.ProcessInstance.class.getName());
             createCache(cm, com.mycompany.myapp.domain.TaskInstance.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Author.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Book.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Book.class.getName() + ".authors");
+            createCache(cm, com.mycompany.myapp.domain.Book.class.getName() + ".orderBooks");
+            createCache(cm, com.mycompany.myapp.domain.Order.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Order.class.getName() + ".orderBooks");
+            createCache(cm, com.mycompany.myapp.domain.OrderBook.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Publisher.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Store.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

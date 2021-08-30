@@ -46,6 +46,12 @@ import ProcessDefinitionService from '@/entities/process-definition/process-defi
 import ProcessDeploymentService from '@/entities/process-deployment/process-deployment.service';
 import ProcessInstanceService from '@/entities/process-instance/process-instance.service';
 import TaskInstanceService from '@/entities/task-instance/task-instance.service';
+import AuthorService from '@/entities/author/author.service';
+import BookService from '@/entities/book/book.service';
+import OrderService from '@/entities/order/order.service';
+import OrderBookService from '@/entities/order-book/order-book.service';
+import PublisherService from '@/entities/publisher/publisher.service';
+import StoreService from '@/entities/store/store.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 /* tslint:enable */
@@ -124,6 +130,12 @@ new Vue({
     processDeploymentService: () => new ProcessDeploymentService(),
     processInstanceService: () => new ProcessInstanceService(),
     taskInstanceService: () => new TaskInstanceService(),
+    authorService: () => new AuthorService(),
+    bookService: () => new BookService(),
+    orderService: () => new OrderService(),
+    orderBookService: () => new OrderBookService(),
+    publisherService: () => new PublisherService(),
+    storeService: () => new StoreService(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService,
   },

@@ -1,0 +1,45 @@
+{
+  "name": "Book",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "pubYear",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Double"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "publisher",
+      "relationshipName": "publisher"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "author",
+      "relationshipName": "authors",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "orderBook",
+      "otherEntityRelationshipName": "book",
+      "relationshipName": "orderBook"
+    }
+  ],
+  "entityTableName": "book",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*"
+}
