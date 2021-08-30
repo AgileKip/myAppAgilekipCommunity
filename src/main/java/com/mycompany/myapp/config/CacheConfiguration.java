@@ -58,7 +58,6 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.Book.class.getName() + ".orderBooks");
             createCache(cm, com.mycompany.myapp.domain.Order.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Order.class.getName() + ".orderBooks");
-            createCache(cm, com.mycompany.myapp.domain.OrderBook.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Publisher.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Store.class.getName());
             createCache(cm, com.mycompany.myapp.domain.OrderBookProcess.class.getName());

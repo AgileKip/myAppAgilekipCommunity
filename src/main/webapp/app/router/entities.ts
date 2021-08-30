@@ -23,10 +23,6 @@ const OrderDetails = () => import('@/entities/order/order-details.vue');
 // prettier-ignore
 const OrderBook = () => import('@/entities/order-book/order-book.vue');
 // prettier-ignore
-const OrderBookUpdate = () => import('@/entities/order-book/order-book-update.vue');
-// prettier-ignore
-const OrderBookDetails = () => import('@/entities/order-book/order-book-details.vue');
-// prettier-ignore
 const Publisher = () => import('@/entities/publisher/publisher.vue');
 // prettier-ignore
 const PublisherUpdate = () => import('@/entities/publisher/publisher-update.vue');
@@ -143,24 +139,6 @@ export default [
     path: '/order-book',
     name: 'OrderBook',
     component: OrderBook,
-    meta: { authorities: [Authority.USER] },
-  },
-  {
-    path: '/order-book/new',
-    name: 'OrderBookCreate',
-    component: OrderBookUpdate,
-    meta: { authorities: [Authority.USER] },
-  },
-  {
-    path: '/order-book/:orderBookId/edit',
-    name: 'OrderBookEdit',
-    component: OrderBookUpdate,
-    meta: { authorities: [Authority.USER] },
-  },
-  {
-    path: '/order-book/:orderBookId/view',
-    name: 'OrderBookView',
-    component: OrderBookDetails,
     meta: { authorities: [Authority.USER] },
   },
   {

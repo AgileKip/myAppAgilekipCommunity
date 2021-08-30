@@ -49,7 +49,6 @@ import TaskInstanceService from '@/entities/task-instance/task-instance.service'
 import AuthorService from '@/entities/author/author.service';
 import BookService from '@/entities/book/book.service';
 import OrderService from '@/entities/order/order.service';
-import OrderBookService from '@/entities/order-book/order-book.service';
 import PublisherService from '@/entities/publisher/publisher.service';
 import StoreService from '@/entities/store/store.service';
 import OrderBookProcessService from '@/entities/order-book-process/order-book-process.service';
@@ -134,7 +133,6 @@ new Vue({
     authorService: () => new AuthorService(),
     bookService: () => new BookService(),
     orderService: () => new OrderService(),
-    orderBookService: () => new OrderBookService(),
     publisherService: () => new PublisherService(),
     storeService: () => new StoreService(),
     orderBookProcessService: () => new OrderBookProcessService(),
