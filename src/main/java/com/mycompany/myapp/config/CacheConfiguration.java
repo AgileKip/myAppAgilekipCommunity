@@ -48,10 +48,10 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.User.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Authority.class.getName());
             createCache(cm, com.mycompany.myapp.domain.User.class.getName() + ".authorities");
-            createCache(cm, com.mycompany.myapp.domain.ProcessDefinition.class.getName());
-            createCache(cm, com.mycompany.myapp.domain.ProcessDeployment.class.getName());
-            createCache(cm, com.mycompany.myapp.domain.ProcessInstance.class.getName());
-            createCache(cm, com.mycompany.myapp.domain.TaskInstance.class.getName());
+//            createCache(cm, org.akip.domain.ProcessDefinition.class.getName());
+//            createCache(cm, org.akip.domain.ProcessDeployment.class.getName());
+//            createCache(cm, org.akip.domain.ProcessInstance.class.getName());
+//            createCache(cm, org.akip.domain.TaskInstance.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,12 +1,8 @@
-import { mixins } from 'vue-class-component';
-
 import { Component, Vue, Inject } from 'vue-property-decorator';
 import Vue2Filters from 'vue2-filters';
 import { ITaskInstance } from '@/shared/model/task-instance.model';
 
 import TaskInstanceService from './task-instance.service';
-import { ITask } from '@/shared/model/task.model';
-import entities from '@/router/entities';
 
 @Component({
   mixins: [Vue2Filters.mixin],
