@@ -1,5 +1,6 @@
+import Vue from 'vue';
 import Component from 'vue-class-component';
-import { Inject, Vue } from 'vue-property-decorator';
+import { Inject } from 'vue-property-decorator';
 import LoginService from '@/account/login.service';
 
 @Component

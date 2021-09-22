@@ -5,6 +5,7 @@
     <span class="badge rounded-pill bg-completed" v-else-if="status == 'COMPLETED'">Completed</span>
     <span class="badge rounded-pill bg-unassigned" v-else-if="status == 'UNASSIGNED'">Unassigned</span>
     <span class="badge rounded-pill bg-delegated" v-else-if="status == 'DELEGATED'">Delegated</span>
+    <span class="badge rounded-pill bg-delegated" v-else>None</span>
   </div>
 </template>
 
